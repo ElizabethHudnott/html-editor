@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>HTML Editor</title>
+</head>
+<body>
+<!-- Bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+<!-- The application -->
+<link rel="stylesheet" href="edit.css"/>
+
+<div class="d-flex" style="height: 100vh">
+	<div id="editor-pane" class="w-50 h-100"></div>
+	<iframe id="preview" class="w-50 h-100"></iframe>
+</div>
+
+<!-- CodeMirror framework core -->
+<link rel="stylesheet" href="lib/codemirror/codemirror.css"/>
+<link rel="stylesheet" href="lib/codemirror/theme/eclipse.css"/>
+<script src="lib/codemirror/codemirror.js"></script>
+
+<!-- CodeMirror Add-ons -->
+<!-- Autocomplete -->
+<link rel="stylesheet" href="lib/codemirror/addon/hint/show-hint.css"/>
+<script src="lib/codemirror/addon/hint/show-hint.js"></script>
+<script src="lib/codemirror/addon/hint/css-hint.js"></script>
+<script src="lib/codemirror/addon/hint/javascript-hint.js"></script>
+<script src="lib/codemirror/addon/hint/xml-hint.js"></script>
+<script src="lib/codemirror/addon/hint/html-hint.js"></script>
+
+<!-- Display (i.e. UI)-->
+<script src="lib/codemirror/addon/display/panel.js"></script>
+
+<!-- Folding -->
+<script src="lib/codemirror/addon/fold/xml-fold.js"></script>
+
+<!-- Editing -->
+<script src="lib/codemirror/addon/edit/closebrackets.js"></script>
+<script src="lib/codemirror/addon/edit/closetag.js"></script>
+<script src="lib/codemirror/addon/edit/matchbrackets.js"></script>
+
+<!-- Markdown -->
+<script src="lib/codemirror/addon/edit/continuelist.js"></script>
+
+<!-- Search -->
+<script src="lib/codemirror/addon/scroll/annotatescrollbar.js"></script>
+<link rel="stylesheet" href="lib/codemirror/addon/scroll/simplescrollbars.css"/>
+<script src="lib/codemirror/addon/scroll/simplescrollbars.js"></script>
+<script src="lib/codemirror/addon/search/searchcursor.js"></script>
+<link rel="stylesheet" href="lib/codemirror/addon/search/matchesonscrollbar.css"/>
+<script src="lib/codemirror/addon/search/matchesonscrollbar.js"></script>
+
+<!-- Highlighting modes -->
+<script src="lib/codemirror/mode/css/css.js"></script>
+<script src="lib/codemirror/mode/javascript/javascript.js"></script>
+<script src="lib/codemirror/mode/markdown/markdown.js"></script>
+<script src="lib/codemirror/mode/xml/xml.js"></script>
+<script src="lib/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+<!-- Bootstrap -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<!-- The application -->
+<script src="edit.js"></script>
+
+</body>
+</html>

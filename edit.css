@@ -1,0 +1,7 @@
+iframe {
+	border: none;
+}
+
+.CodeMirror pre > * {
+	text-indent: 0px;
+}
