@@ -2,6 +2,10 @@ iframe {
 	border: none;
 }
 
+.CodeMirror {
+	height: 100%;
+}
+
 .CodeMirror pre > * {
 	text-indent: 0px;
 }
