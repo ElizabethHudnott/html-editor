@@ -1,4 +1,16 @@
+var paneData = new Map();
+
+//Search
+CodeMirror.commands.find = function (editor) {
+	var searchPanel = paneData.get(editor).searchPanel;
+	searchPanel.classList.remove('d-none');
+	searchPanel.querySelector('.search').focus();
+};
+
 var editorPane = document.getElementById('editor-pane');
+
+//-----------------------
+
 var editor = CodeMirror(editorPane, {
 	autoCloseBrackets: '()[]{}\'\'""',
 	matchBrackets: true,
@@ -9,10 +21,46 @@ var editor = CodeMirror(editorPane, {
 	maxHighlightLength: Infinity,
 	mode: 'text/html',
 	rtlMoveVisually: true,
-	tabSize: 2,
+	scrollbarStyle: 'simple',
+	tabSize: 4,
 	theme: 'eclipse',
 });
 
+var searchPanelOuter = document.createElement('div');
+searchPanelOuter.setAttribute('class', 'd-none d-print-none');
+editorPane.append(searchPanelOuter);
+
+var searchPanel = document.createElement('div');
+searchPanel.setAttribute('class', 'd-flex align-items-center py-1');
+searchPanelOuter.append(searchPanel);
+
+var searchBox = document.createElement('input');
+searchBox.setAttribute('type', 'search');
+searchBox.setAttribute('class', 'form-control search flex-grow mx-1');
+searchBox.setAttribute('placeholder', 'search');
+searchBox.setAttribute('aria-label', 'Search');
+searchPanel.append(searchBox);
+searchBox.addEventListener('input', function (event) {
+	var searchStr = event.target.value;
+	editor.showMatchesOnScrollbar(searchStr);
+});
+
+var closeSearchButton = document.createElement('button');
+closeSearchButton.setAttribute('type', 'button');
+closeSearchButton.setAttribute('class', 'close');
+closeSearchButton.setAttribute('aria-label', 'Close');
+closeSearchButton.innerHTML = '<span aria-hidden="true">&times;</span>';
+searchPanel.append(closeSearchButton);
+closeSearchButton.addEventListener('click', function (event) {
+	searchPanelOuter.classList.add('d-none');
+	editor.focus();
+});
+
+paneData.set(editor, {
+	searchPanel: searchPanelOuter,
+});
+
+//Autocomplete
 editor.on("inputRead", function(instance) {
     if (instance.state.completionActive) {
         return;
@@ -29,6 +77,7 @@ editor.on("inputRead", function(instance) {
     }
 });
 
+//Indentation
 var charWidth = editor.defaultCharWidth(), basePadding = 4;
 editor.on("renderLine", function(cm, line, elt) {
 	var off = CodeMirror.countColumn(line.text, null, cm.getOption("tabSize")) * charWidth;
@@ -36,7 +85,7 @@ editor.on("renderLine", function(cm, line, elt) {
 	elt.style.paddingLeft = (basePadding + off) + "px";
 });
 
-
+//Preview
 var delay;
 editor.on("change", function() {
 	clearTimeout(delay);

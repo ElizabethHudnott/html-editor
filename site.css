@@ -1,0 +1,7 @@
+iframe {
+	border: none;
+}
+
+.flex-grow {
+	flex-grow: 1;
+}
