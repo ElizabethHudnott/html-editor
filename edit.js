@@ -94,8 +94,5 @@ editor.on("change", function() {
 
 function updatePreview() {
 	var previewFrame = document.getElementById('preview');
-	var preview =  previewFrame.contentDocument ||  previewFrame.contentWindow.document;
-	preview.open();
-	preview.write(editor.getValue());
-	preview.close();
+	previewFrame.srcdoc = editor.getValue();
 }
