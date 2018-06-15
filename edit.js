@@ -32,18 +32,21 @@ function createTab(paneName, tabName, tabTitle, active) {
 
 	//Create a <div> to put the tab's content into.
 	var pane = document.getElementById(paneName);
-	var contentDiv = document.createElement('div');
-	contentDiv.setAttribute('class', 'tab-pane fade w-100 full-height d-flex flex-column');
+	var outerDiv = document.createElement('div');
+	outerDiv.classList.add('tab-pane');
 	if (active) {
-		contentDiv.classList.add('show');
-		contentDiv.classList.add('active');
+		outerDiv.classList.add('show');
+		outerDiv.classList.add('active');
 	}
-	contentDiv.setAttribute('id', tabName);
-	contentDiv.setAttribute('role', 'tabpanel');
-	contentDiv.setAttribute('aria-labelledby', tabName + '-tab');
-	pane.append(contentDiv);
+	outerDiv.setAttribute('id', tabName);
+	outerDiv.setAttribute('role', 'tabpanel');
+	outerDiv.setAttribute('aria-labelledby', tabName + '-tab');
+	pane.append(outerDiv);
 
-	return contentDiv;
+	var contentDiv = document.createElement('div');
+	contentDiv.setAttribute('class', 'w-100 full-height d-flex flex-column');
+	outerDiv.append(contentDiv);
+	return [$(tab), contentDiv];
 }
 
 function createEditor(container, mode) {
@@ -131,12 +134,20 @@ function createEditor(container, mode) {
 	return editor;
 } //End createEditor function
 
-var htmlEditorContainer = createTab('left-pane', 'content', 'Content', true);
-var cssEditorContainer = createTab('left-pane', 'style', 'Style', false);
+var [htmlTab, htmlEditorContainer] = createTab('left-pane', 'content', 'Content', true);
+var [cssTab, cssEditorContainer] = createTab('left-pane', 'style', 'Style', false);
 
 var htmlEditor = createEditor(htmlEditorContainer, 'text/html');
 var cssEditor = createEditor(cssEditorContainer, 'text/css');
 htmlEditor.focus();
+
+htmlTab.on('shown.bs.tab', function (event) {
+	htmlEditor.focus();
+});
+
+cssTab.on('shown.bs.tab', function (event) {
+	cssEditor.focus();
+});
 
 //Preview
 var previewFrame = document.getElementById('preview');
