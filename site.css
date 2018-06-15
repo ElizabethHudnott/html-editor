@@ -5,3 +5,9 @@ iframe {
 .flex-grow {
 	flex-grow: 1;
 }
+
+.full-height {
+	bottom: 0;
+	position: absolute;
+	top: 0;
+}

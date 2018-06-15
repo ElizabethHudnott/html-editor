@@ -8,9 +8,31 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
 <!-- The application -->
 
-<div class="d-flex" style="height: 100vh">
-	<div id="editor-pane" class="d-flex flex-column w-50 h-100"></div>
-	<iframe id="preview" class="w-50 h-100" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox"></iframe>
+<div class="d-flex p-1" style="height: 100vh">
+	<div class="d-flex flex-column w-50">
+		<nav>
+			<ul class="nav nav-tabs" id="left-pane-tabs" role="tablist">
+				<li class="nav-item">
+					<a class="nav-link active" id="content-tab" data-toggle="tab" href="#content" role="tab" aria-selected="true">Content</a>
+				</li>
+			</ul>
+		</nav>
+		<div class="tab-content flex-grow position-relative" id="left-pane" style="border-right-style: ridge;">
+			<div class="tab-pane fade show active w-100 full-height d-flex flex-column" id="content" role="tabpanel" aria-labelledby="content-tab"></div>
+		</div>
+	</div>
+	<div class="d-flex flex-column w-50">
+		<nav>
+			<ul class="nav nav-tabs" id="right-pane-tabs" role="tablist">
+				<li class="nav-item">
+					<a class="nav-link active" id="preview-tab" data-toggle="tab" href="#preview" role="tab" aria-selected="true">Preview</a>
+				</li>
+			</ul>
+		</nav>
+		<div class="tab-content flex-grow position-relative" id="right-pane">
+			<iframe class="tab-pane fade show active w-100 full-height" id="preview" role="tabpanel" aria-labelledby="preview-tab" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox"></iframe>
+		</div>
+	</div>
 </div>
 
 <!-- CodeMirror framework core -->

@@ -7,11 +7,14 @@ CodeMirror.commands.find = function (editor) {
 	searchPanel.querySelector('.search').focus();
 };
 
-var editorPane = document.getElementById('editor-pane');
+var editorPane = document.getElementById('content');
 
 //-----------------------
 
-var editor = CodeMirror(editorPane, {
+var editor = CodeMirror(function (element) {
+		element.classList.add('flex-grow');
+		editorPane.append(element);
+	}, {
 	autoCloseBrackets: '()[]{}\'\'""',
 	matchBrackets: true,
 	autoCloseTags: true,
