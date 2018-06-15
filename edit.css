@@ -1,4 +1,6 @@
 .CodeMirror {
+	font-family: Consolas, Inconsolata, monospace;
+	font-size: 11pt;
 	height: 100%;
 }
 
