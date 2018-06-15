@@ -11,3 +11,7 @@ iframe {
 	position: absolute;
 	top: 0;
 }
+
+.nav-tabs .nav-link {
+    border-color: #e9ecef #e9ecef #dee2e6;
+}
