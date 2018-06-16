@@ -56,7 +56,19 @@ function createEditor(container, mode) {
 		}, {
 		autoCloseBrackets: '()[]{}\'\'""',
 		matchBrackets: true,
-		autoCloseTags: true,
+		autoCloseTags: {
+			whenClosing: true,
+			whenOpening: true,
+			indentTags: [
+				"address", "article", "aside", "audio", "blockquote", "canvas", "colgroup",
+				"datalist", "dd", "details", "dialog", "div", "dl", "fieldset", "figure",
+				"footer", "form", "h1", "h2", "h3", "h4", "header", "hgroup", "iframe",
+				"label", "map", "math", "menu", "nav", "noscript", "object", "ol",
+				"optgroup", "p", "picture", "pre", "ruby", "section", "select", "style",
+				"summary", "svg", "table", "tbody", "template", "textarea", "tfoot",
+				"thead", "tr", "ul", "video"
+			],
+		},
 		autofocus: true,
 		indentWithTabs: true,
 		lineWrapping: true,
@@ -79,7 +91,7 @@ function createEditor(container, mode) {
 	var searchBox = document.createElement('input');
 	searchBox.setAttribute('type', 'search');
 	searchBox.setAttribute('class', 'form-control search flex-grow mx-1');
-	searchBox.setAttribute('placeholder', 'search');
+	searchBox.setAttribute('placeholder', 'Search');
 	searchBox.setAttribute('aria-label', 'Search');
 	searchPanel.append(searchBox);
 	searchBox.addEventListener('input', function (event) {
