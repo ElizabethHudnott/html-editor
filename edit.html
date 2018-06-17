@@ -30,7 +30,8 @@
 			</ul>
 		</nav>
 		<div class="tab-content flex-grow position-relative border-left border-right" id="right-pane">
-			<iframe class="tab-pane fade show active w-100 full-height" id="preview" role="tabpanel" aria-labelledby="preview-tab" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox"></iframe>
+			<iframe class="tab-pane fade show active w-100 full-height" id="preview" role="tabpanel" aria-labelledby="preview-tab" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-scripts"></iframe>
+			<!-- Don't allow: Payment API, modals, screen orientation lock, same-origin, top-navigation -->
 		</div>
 	</div>
 </div>
