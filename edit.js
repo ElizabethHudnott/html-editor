@@ -9,13 +9,13 @@ CodeMirror.commands.find = function (editor) {
 
 //-----------------------
 
-function createTab(paneName, tabName, tabTitle, active) {
+function createTab(paneName, tabName, tabTitle, active, beforeTab) {
 
 	//Create a tab on the tab bar.
 	var tabList = document.getElementById(paneName + '-tabs');
 	var tabListItem = document.createElement('li');
 	tabListItem.classList.add('nav-item');
-	tabList.append(tabListItem);
+	tabList.insertBefore(tabListItem, beforeTab? beforeTab.parentNode : null);
 
 	var tab = document.createElement('a');
 	tab.classList.add('nav-link');
@@ -28,7 +28,7 @@ function createTab(paneName, tabName, tabTitle, active) {
 	tab.setAttribute('role', 'tab');
 	tab.setAttribute('aria-selected', 'true');
 	tab.innerHTML = tabTitle;
-	tabListItem.append(tab);
+	tabListItem.appendChild(tab);
 
 	//Create a <div> to put the tab's content into.
 	var pane = document.getElementById(paneName);
@@ -41,18 +41,18 @@ function createTab(paneName, tabName, tabTitle, active) {
 	outerDiv.setAttribute('id', tabName);
 	outerDiv.setAttribute('role', 'tabpanel');
 	outerDiv.setAttribute('aria-labelledby', tabName + '-tab');
-	pane.append(outerDiv);
+	pane.appendChild(outerDiv);
 
 	var contentDiv = document.createElement('div');
 	contentDiv.setAttribute('class', 'w-100 full-height d-flex flex-column');
-	outerDiv.append(contentDiv);
+	outerDiv.appendChild(contentDiv);
 	return [$(tab), contentDiv];
 }
 
 function createEditor(container, mode) {
 	var editor = CodeMirror(function (element) {
 			element.classList.add('flex-grow');
-			container.append(element);
+			container.appendChild(element);
 		}, {
 		autoCloseBrackets: '()[]{}\'\'""',
 		matchBrackets: true,
@@ -82,18 +82,18 @@ function createEditor(container, mode) {
 
 	var searchPanelOuter = document.createElement('div');
 	searchPanelOuter.setAttribute('class', 'd-none d-print-none');
-	container.append(searchPanelOuter);
+	container.appendChild(searchPanelOuter);
 
 	var searchPanel = document.createElement('div');
 	searchPanel.setAttribute('class', 'd-flex align-items-center py-1');
-	searchPanelOuter.append(searchPanel);
+	searchPanelOuter.appendChild(searchPanel);
 
 	var searchBox = document.createElement('input');
 	searchBox.setAttribute('type', 'search');
 	searchBox.setAttribute('class', 'form-control search flex-grow mx-1');
 	searchBox.setAttribute('placeholder', 'Search');
 	searchBox.setAttribute('aria-label', 'Search');
-	searchPanel.append(searchBox);
+	searchPanel.appendChild(searchBox);
 	searchBox.addEventListener('input', function (event) {
 		var searchStr = event.target.value;
 		editor.showMatchesOnScrollbar(searchStr);
@@ -104,7 +104,7 @@ function createEditor(container, mode) {
 	closeSearchButton.setAttribute('class', 'close');
 	closeSearchButton.setAttribute('aria-label', 'Close');
 	closeSearchButton.innerHTML = '<span aria-hidden="true">&times;</span>';
-	searchPanel.append(closeSearchButton);
+	searchPanel.appendChild(closeSearchButton);
 	closeSearchButton.addEventListener('click', function (event) {
 		searchPanelOuter.classList.add('d-none');
 		editor.focus();
@@ -146,8 +146,9 @@ function createEditor(container, mode) {
 	return editor;
 } //End createEditor function
 
-var [htmlTab, htmlEditorContainer] = createTab('left-pane', 'content', 'Content', true);
-var [cssTab, cssEditorContainer] = createTab('left-pane', 'style', 'Style', false);
+var headTab = document.getElementById('head-tab');
+var [htmlTab, htmlEditorContainer] = createTab('left-pane', 'content', 'Content', true, headTab);
+var [cssTab, cssEditorContainer] = createTab('left-pane', 'style', 'Style', false, headTab);
 
 var htmlEditor = createEditor(htmlEditorContainer, 'text/html');
 var cssEditor = createEditor(cssEditorContainer, 'text/css');
@@ -161,13 +162,32 @@ cssTab.on('shown.bs.tab', function (event) {
 	cssEditor.focus();
 });
 
+//Page options
+var options = {
+	mathjax: false
+}
+var head = '';
+
 //Preview
 var previewFrame = document.getElementById('preview');
+
+function updateHead() {
+	head = '';
+	if (options.mathjax) {
+		head = head + '<script src="mathjax-config.js"></script>\n<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js"></script>';
+	}
+}
+
+document.getElementById('opt-mathjax').addEventListener('input', function (event) {
+	options.mathjax = event.target.checked;
+	updateHead();
+	updatePreview();
+});
 
 function updatePreview() {
 	var html = htmlEditor.getValue();
 	var css = cssEditor.getValue();
-	previewFrame.srcdoc = `<style>${css}</style>${html}`;
+	previewFrame.srcdoc = `<head>${head}<style>${css}</style></head>${html}`;
 }
 
 var previewTimer;

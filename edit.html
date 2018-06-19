@@ -16,9 +16,19 @@
 	<div class="d-flex flex-column w-50">
 		<nav>
 			<ul class="nav nav-tabs" id="left-pane-tabs" role="tablist">
+				<li class="nav-item">
+					<a class="nav-link" id="head-tab" data-toggle="tab" href="#head" role="tab">Metadata</a>
+				</li>
 			</ul>
 		</nav>
 		<div class="tab-content flex-grow position-relative border-left" id="left-pane" style="border-right-style: ridge;">
+			<div class="tab-pane p-3 w-100 full-height" id="head" role="tabpanel" aria-labelledby="head-tab">
+				<h2>Libraries &amp; Frameworks</h2>
+				<label>
+					<input type="checkbox" id="opt-mathjax"/>
+					LaTeX math
+				</label>
+			</div>
 		</div>
 	</div>
 	<div class="d-flex flex-column w-50">
@@ -30,8 +40,8 @@
 			</ul>
 		</nav>
 		<div class="tab-content flex-grow position-relative border-left border-right" id="right-pane">
-			<iframe class="tab-pane fade show active w-100 full-height" id="preview" role="tabpanel" aria-labelledby="preview-tab" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-scripts"></iframe>
-			<!-- Don't allow: Payment API, modals, screen orientation lock, same-origin, top-navigation -->
+			<iframe class="tab-pane show active w-100 full-height" id="preview" role="tabpanel" aria-labelledby="preview-tab" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-scripts"></iframe>
+			<!-- Don't allow: Payment API, modals, screen orientation lock, same-origin, top navigation -->
 		</div>
 	</div>
 </div>
