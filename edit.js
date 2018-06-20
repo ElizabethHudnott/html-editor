@@ -1,23 +1,32 @@
-var paneData = new Map();
+
+const libraryHTML = Object.freeze({
+	none: '',
+	bootstrap: '<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"/>\n',
+	bootstrapFull: '<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"/>\n<script defer src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>\n',
+	jQuery: '<script defer src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>\n',
+	jQuerySlim: '<script defer src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>\n',
+	mathJax: '<script src="mathjax-config.js"></script>\n<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js"></script>\n',
+	popperJS: '<script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>\n',
+});
+
+let paneData = new Map();
 
 //Search
 CodeMirror.commands.find = function (editor) {
-	var searchPanel = paneData.get(editor).searchPanel;
+	let searchPanel = paneData.get(editor).searchPanel;
 	searchPanel.classList.remove('d-none');
 	searchPanel.querySelector('.search').focus();
 };
 
-//-----------------------
-
 function createTab(paneName, tabName, tabTitle, active, beforeTab) {
 
 	//Create a tab on the tab bar.
-	var tabList = document.getElementById(paneName + '-tabs');
-	var tabListItem = document.createElement('li');
+	let tabList = document.getElementById(paneName + '-tabs');
+	let tabListItem = document.createElement('li');
 	tabListItem.classList.add('nav-item');
 	tabList.insertBefore(tabListItem, beforeTab? beforeTab.parentNode : null);
 
-	var tab = document.createElement('a');
+	let tab = document.createElement('a');
 	tab.classList.add('nav-link');
 	if (active) {
 		tab.classList.add('active');
@@ -31,8 +40,8 @@ function createTab(paneName, tabName, tabTitle, active, beforeTab) {
 	tabListItem.appendChild(tab);
 
 	//Create a <div> to put the tab's content into.
-	var pane = document.getElementById(paneName);
-	var outerDiv = document.createElement('div');
+	let pane = document.getElementById(paneName);
+	let outerDiv = document.createElement('div');
 	outerDiv.classList.add('tab-pane');
 	if (active) {
 		outerDiv.classList.add('show');
@@ -43,14 +52,14 @@ function createTab(paneName, tabName, tabTitle, active, beforeTab) {
 	outerDiv.setAttribute('aria-labelledby', tabName + '-tab');
 	pane.appendChild(outerDiv);
 
-	var contentDiv = document.createElement('div');
+	let contentDiv = document.createElement('div');
 	contentDiv.setAttribute('class', 'w-100 full-height d-flex flex-column');
 	outerDiv.appendChild(contentDiv);
 	return [$(tab), contentDiv];
 }
 
 function createEditor(container, mode) {
-	var editor = CodeMirror(function (element) {
+	let editor = CodeMirror(function (element) {
 			element.classList.add('flex-grow');
 			container.appendChild(element);
 		}, {
@@ -80,26 +89,26 @@ function createEditor(container, mode) {
 		theme: 'eclipse',
 	});
 
-	var searchPanelOuter = document.createElement('div');
+	let searchPanelOuter = document.createElement('div');
 	searchPanelOuter.setAttribute('class', 'd-none d-print-none');
 	container.appendChild(searchPanelOuter);
 
-	var searchPanel = document.createElement('div');
+	let searchPanel = document.createElement('div');
 	searchPanel.setAttribute('class', 'd-flex align-items-center py-1');
 	searchPanelOuter.appendChild(searchPanel);
 
-	var searchBox = document.createElement('input');
+	let searchBox = document.createElement('input');
 	searchBox.setAttribute('type', 'search');
 	searchBox.setAttribute('class', 'form-control search flex-grow mx-1');
 	searchBox.setAttribute('placeholder', 'Search');
 	searchBox.setAttribute('aria-label', 'Search');
 	searchPanel.appendChild(searchBox);
 	searchBox.addEventListener('input', function (event) {
-		var searchStr = event.target.value;
+		let searchStr = event.target.value;
 		editor.showMatchesOnScrollbar(searchStr);
 	});
 
-	var closeSearchButton = document.createElement('button');
+	let closeSearchButton = document.createElement('button');
 	closeSearchButton.setAttribute('type', 'button');
 	closeSearchButton.setAttribute('class', 'close');
 	closeSearchButton.setAttribute('aria-label', 'Close');
@@ -111,9 +120,9 @@ function createEditor(container, mode) {
 	});
 
 	//Indentation
-	var charWidth = editor.defaultCharWidth(), basePadding = 4;
+	let charWidth = editor.defaultCharWidth(), basePadding = 4;
 	editor.on("renderLine", function(cm, line, elt) {
-		var off = CodeMirror.countColumn(line.text, null, cm.getOption("tabSize")) * charWidth;
+		let off = CodeMirror.countColumn(line.text, null, cm.getOption("tabSize")) * charWidth;
 		elt.style.textIndent = "-" + off + "px";
 		elt.style.paddingLeft = (basePadding + off) + "px";
 	});
@@ -126,10 +135,10 @@ function createEditor(container, mode) {
 		    if (instance.state.completionActive) {
 		        return;
 		    }
-		    var cur = instance.getCursor();
-		    var token = instance.getTokenAt(cur);
-		    var string = token.string;
-		    var autocompleteString = '';
+		    let cur = instance.getCursor();
+		    let token = instance.getTokenAt(cur);
+		    let string = token.string;
+		    let autocompleteString = '';
 		    if (string === '<') {
 		        autocompleteString = string;
 		    }
@@ -146,12 +155,12 @@ function createEditor(container, mode) {
 	return editor;
 } //End createEditor function
 
-var headTab = document.getElementById('head-tab');
-var [htmlTab, htmlEditorContainer] = createTab('left-pane', 'content', 'Content', true, headTab);
-var [cssTab, cssEditorContainer] = createTab('left-pane', 'style', 'Style', false, headTab);
+let headTab = document.getElementById('head-tab');
+let [htmlTab, htmlEditorContainer] = createTab('left-pane', 'content', 'Content', true, headTab);
+let [cssTab, cssEditorContainer] = createTab('left-pane', 'style', 'Style', false, headTab);
 
-var htmlEditor = createEditor(htmlEditorContainer, 'text/html');
-var cssEditor = createEditor(cssEditorContainer, 'text/css');
+let htmlEditor = createEditor(htmlEditorContainer, 'text/html');
+let cssEditor = createEditor(cssEditorContainer, 'text/css');
 htmlEditor.focus();
 
 htmlTab.on('shown.bs.tab', function (event) {
@@ -162,39 +171,58 @@ cssTab.on('shown.bs.tab', function (event) {
 	cssEditor.focus();
 });
 
-//Page options
-var options = {
-	mathjax: false
-}
-var head = '';
-
 //Preview
-var previewFrame = document.getElementById('preview');
-
-function updateHead() {
-	head = '';
-	if (options.mathjax) {
-		head = head + '<script src="mathjax-config.js"></script>\n<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js"></script>';
-	}
-}
-
-document.getElementById('opt-mathjax').addEventListener('input', function (event) {
-	options.mathjax = event.target.checked;
-	updateHead();
-	updatePreview();
-});
+let previewFrame = document.getElementById('preview');
+let head = '';
 
 function updatePreview() {
-	var html = htmlEditor.getValue();
-	var css = cssEditor.getValue();
+	let html = htmlEditor.getValue();
+	let css = cssEditor.getValue();
 	previewFrame.srcdoc = `<head>${head}<style>${css}</style></head>${html}`;
 }
 
-var previewTimer;
+let previewTimer;
 function queuePreview() {
 	clearTimeout(previewTimer);
 	previewTimer = setTimeout(updatePreview, 300);
 }
+
+let optJQuery = $('#opt-jquery input');
+let optJQueryNone = document.getElementById('opt-jquery-none');
+let optJQuerySlim = document.getElementById('opt-jquery-slim');
+let optBootstrap = $('#opt-bootstrap input');
+let optPopperJS = document.getElementById('opt-popper');
+let optMathJax = document.getElementById('opt-mathjax');
+
+function updateLibraries() {
+	let jQueryOption = findCheckedRadioButton(optJQuery);
+	let bootstrapOption = findCheckedRadioButton(optBootstrap);
+	if (bootstrapOption === 'bootstrapFull') {
+		optJQueryNone.disabled = true;
+		if (jQueryOption === 'none') {
+			jQueryOption = 'jQuerySlim';
+			optJQuerySlim.checked = true;
+		}
+	} else {
+		optJQueryNone.disabled = false;
+	}
+
+	head = '';
+	if (optMathJax.checked) {
+		head = head + libraryHTML.mathJax;
+	}
+	head = head + libraryHTML[jQueryOption];
+	if (optPopperJS.checked) {
+		head = head + libraryHTML.popperJS;
+	}
+	head = head + libraryHTML[bootstrapOption];
+	queuePreview();
+}
+
+optJQuery.on('input', updateLibraries);
+optBootstrap.on('input', updateLibraries);
+optPopperJS.addEventListener('input', updateLibraries);
+optMathJax.addEventListener('input', updateLibraries);
 
 htmlEditor.on("change", queuePreview);
 cssEditor.on("change", queuePreview);
