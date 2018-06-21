@@ -23,8 +23,24 @@
 		</nav>
 		<div class="tab-content flex-grow position-relative border-left" id="left-pane" style="border-right-style: ridge;">
 			<div class="tab-pane p-3 w-100 full-height" id="head" role="tabpanel" aria-labelledby="head-tab">
+				<h2>Title</h2>
+				<table class="form-group table table-borderless">
+					<colgroup>
+						<col style="width: 15%"/>
+						<col/>
+					</colgroup>
+					<tr>
+						<th>
+							<label for="head-title">Tab Name</label>
+						</th>
+						<td>
+							<input id="head-title" class="form-control"/>
+						</td>
+					</tr>
+				</table>
+
 				<h2>Libraries &amp; Toolkits</h2>
-				<table class="table" style="table-layout: fixed;">
+				<table class="table">
 					<tr id="opt-jquery">
 						<th>jQuery</th>
 						<td>
@@ -69,24 +85,16 @@
 					</tr>
 					<tr>
 						<th>Other</th>
-						<td>
-							<ul class="list-unstyled">
-								<li>
-									<label>
-										<input type="checkbox" id="opt-popper"/>
-										Popper.js
-									</label>
-								</li>
-								<li>
-									<label>
-										<input type="checkbox" id="opt-mathjax"/>
-										MathJax (LaTeX math)
-									</label>
-								</li>
-							</ul>
+						<td colspan="3">
+							<div class="form-check">
+								<input type="checkbox" id="opt-popper" class="form-check-input"/>
+								<label for="opt-popper" class="form-check-label">Popper.js</label>
+							</div>
+							<div class="form-check">
+								<input type="checkbox" id="opt-mathjax" class="form-check-input"/>
+								<label for="opt-mathjax" class="form-check-label">MathJax (LaTeX math)</label>
+							</div>
 						</td>
-						<td></td>
-						<td></td>
 					</tr>
 				</table>
 			</div>
