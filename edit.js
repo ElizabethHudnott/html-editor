@@ -158,6 +158,7 @@ function createEditor(container, mode) {
 let headTab = document.getElementById('head-tab');
 let [htmlTab, htmlEditorContainer] = createTab('left-pane', 'content', 'Content', true, headTab);
 let [cssTab, cssEditorContainer] = createTab('left-pane', 'style', 'Style', false, headTab);
+let helpFrame = document.getElementById('help');
 
 let htmlEditor = createEditor(htmlEditorContainer, 'text/html');
 let cssEditor = createEditor(cssEditorContainer, 'text/css');
@@ -165,10 +166,16 @@ htmlEditor.focus();
 
 htmlTab.on('shown.bs.tab', function (event) {
 	htmlEditor.focus();
+	helpFrame.src = 'help/index.html#content';
 });
 
 cssTab.on('shown.bs.tab', function (event) {
 	cssEditor.focus();
+	helpFrame.src = 'help/index.html#style';
+});
+
+$(headTab).on('show.bs.tab', function (event) {
+	helpFrame.src = 'help/index.html#head';
 });
 
 //Preview

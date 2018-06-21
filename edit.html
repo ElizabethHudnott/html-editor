@@ -96,13 +96,17 @@
 		<nav>
 			<ul class="nav nav-tabs" id="right-pane-tabs" role="tablist">
 				<li class="nav-item">
-					<a class="nav-link active" id="preview-tab" data-toggle="tab" href="#preview" role="tab" aria-selected="true">Preview</a>
+					<a class="nav-link" id="preview-tab" data-toggle="tab" href="#preview" role="tab">Preview</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link active" id="help-tab" data-toggle="tab" href="#help" role="tab" aria-selected="true">Help</a>
 				</li>
 			</ul>
 		</nav>
 		<div class="tab-content flex-grow position-relative border-left border-right" id="right-pane">
-			<iframe class="tab-pane show active w-100 full-height" id="preview" role="tabpanel" aria-labelledby="preview-tab" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-scripts"></iframe>
+			<iframe class="tab-pane w-100 full-height" id="preview" role="tabpanel" aria-labelledby="preview-tab" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-scripts"></iframe>
 			<!-- Don't allow: Payment API, modals, screen orientation lock, same-origin, top navigation -->
+			<iframe class="tab-pane show active w-100 full-height" id="help" role="tabpanel" aria-labelledby="help-tab" src="help/index.html#content"></iframe>
 		</div>
 	</div>
 </div>

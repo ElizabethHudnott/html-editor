@@ -6,177 +6,190 @@
 	<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js"></script>
 	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"/>
 	<link href="help.css" rel="stylesheet"/>
+	<style>
+		article {
+			display: none;
+		}
+	</style>
 </head>
-<body>
-	<div class="container">
-		<article id="content">
-			<h1>Writing Content Using HTML</h1>
-			<p>
-				Compose your manuscript by typing into the panel opposite. Use HTML tags to describe the semantic structure of your work.
-			</p>
-			<p>
-				For example:
-			</p>
-	<pre class="text-pre-wrap"><code>
-	&lt;h2&gt;
-		This Is A Heading
-	&lt;/h2&gt;
-	&lt;p&gt;
-		This text is in the first paragraph.
-	&lt;/p&gt;
-	&lt;p&gt;
-		This text is contained in a second paragraph all of its own.
-	&lt;/p&gt;
-	</code></pre>
-			<p>
-				You can see your code transformed into the completed document by clicking on the Preview tab.
-			</p>
-			<p>
-				Don't include the following tags in your code: <code>&lt;!DOCTYPE&gt;</code>, <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code>, <code>&lt;title&gt;</code>, <code>&lt;body&gt;</code>, <code>&lt;base&gt;</code> or <code>&lt;meta&gt;</code>. These will be inserted automatically.
-			</p>
-		</article>
-
-		<article id="style">
-			<h1>Improving Formatting using CSS</h1>
-			<p>
-				Change the formatting of your work by writing CSS code.
-			</p>
-			<ul>
-				<li>
-					CSS code is written in blocks.
-				</li>
-				<li>
-					Each block begins with a <dfn>selector</dfn>, which describes which parts of the document need restyling.
-				</li>
-				<li>
-					Inside a block, each line includes:
-					<ol>
-						<li>the <dfn>property name</dfn> that describes which aspect of the formatting should be changed, and,</li>
-						<li>the <dfn>property value</dfn>, which gives the exact color, measurement, font name, etc.</li>
-					</ol>
-				</li>
-			</ul>
-			<p>
-				For example:
-			</p>
-	<pre><code>
-	h2 {
-		background-color: rgb(255, 160, 120);
-		font-family: cursive;
-		padding: 5pt;
-	}
-	</code></pre>
-		</article>
-
-		<article id="head">
-			<h1>Changing Document Options</h1>
-
-			<h2>Libraries &amp; Toolkits</h2>
-			<p>
-				Choose options from this section to attach third-party code to your document to help automate common tasks.
-			</p>
-
-			<h3>jQuery</h3>
-			<ul>
-				<li>
-					For changing the document content and styling dynamically (e.g. in response to mouse clicks).
-				</li>
-				<li>
-					The slim build doesn't include any <a href="https://api.jquery.com/category/ajax">AJAX</a> or <a href="https://api.jquery.com/category/effects">animation effect</a> functionality.
-				</li>
-				<li>
-					Documentation: <a href="https://jquery.com">jquery.com</a>
-				</li>
-			</ul>
-
-			<h3>Bootstrap</h3>
-			<ul>
-				<li>
-					Gives documents a modern look that's consistent across different devices and browsers.
-				</li>
-				<li>
-					To enable everything Bootstrap is capable of providing choose the CSS&nbsp;+&nbsp;JS option and tick the Popper.js box.
-				</li>
-				<li>
-					Documentation: <a href="https://getbootstrap.com/docs/4.1/layout/overview">getbootstrap.com</a>
-				</li>
-			</ul>
-
-			<h3>Popper.js</h3>
-			<ul>
-				<li>
-					Lets you add popover, drop-down and tooltip elements to your graphical user interface.
-				</li>
-				<li>
-					Can be used in combination with Bootstrap or standalone.
-				</li>
-				<li>
-					Documentation:
-					<ul class="list-inline d-inline">
-						<li class="list-inline-item"><a href="https://getbootstrap.com/docs/4.1/components/popovers">popovers</a></li>
-						<li class="list-inline-item"><a href="https://getbootstrap.com/docs/4.1/components/dropdowns">drop-down menus</a></li>
-						<li class="list-inline-item"><a href="https://getbootstrap.com/docs/4.1/components/tooltips">tooltips</a></li>
-						<li class="list-inline-item"><a href="https://popper.js.org">standalone</a></li>
-					</ul>
-				</li>
-			</ul>
-
-			<h3>MathJax</h3>
-			<p>
-				MathJax lets you use the math commands from the LaTeX language to include equations and theorems in your documents. It also supports the amsmath and amssymb LaTeX extension packages.
-			</p>
-			<p>
-				Insert math inside a paragraph by writing it between two <code>$</code> signs.
-			</p>
+<body class="m-4">
+<article id="content">
+	<h1>Writing Content Using HTML</h1>
+	<p>
+		Compose your manuscript by typing into the panel opposite. Use HTML tags to describe the semantic structure of your work.
+	</p>
+	<p>
+		For example:
+	</p>
 <pre class="text-pre-wrap"><code>
-	&lt;p&gt;
-		Pythagoras's theorem, usually quoted as $a^2&nbsp;= b^2&nbsp;+ c^2$, informs us that the square of the length of the hypotenuse of a right-angled triangle is equal to the sum of the squares of the other two side lengths.
-	&lt;/p&gt;
+&lt;h2&gt;
+	This Is A Heading
+&lt;/h2&gt;
+&lt;p&gt;
+	This text is in the first paragraph.
+&lt;/p&gt;
+&lt;p&gt;
+	This text is contained in a second paragraph all of its own.
+&lt;/p&gt;
 </code></pre>
-			<blockquote class="blockquote bg-light">
-				Pythagoras's theorem, usually quoted as $a^2 = b^2 + c^2$, informs us that the
-				square of the length of the hypotenuse of a right-angled triangle is equal to the
-				sum of the squares of the other two side lengths.
-			</blockquote>
-			<p>
-				Or place an equation on a line of its own using <code>\begin{equation}</code>&hellip; <code>\end{equation}</code>.
-			</p>
-<pre class="text-pre-wrap"><code>
-	&lt;p&gt;
-		The proof is via Pythagoras Theorem (Equation&amp;nbsp;\ref{pythag}).
-	&lt;/p&gt;
+	<p>
+		You can see your code transformed into the completed document by clicking on the Preview tab.
+	</p>
+	<p>
+		Don't include the following tags in your code: <code>&lt;!DOCTYPE&gt;</code>, <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code>, <code>&lt;title&gt;</code>, <code>&lt;body&gt;</code>, <code>&lt;base&gt;</code> or <code>&lt;meta&gt;</code>. These will be inserted automatically.
+	</p>
+</article>
 
-	\begin{equation}\label{pythag}
-		a^2&nbsp;= b^2&nbsp;+ c^2
-	\end{equation}
+<article id="style">
+	<h1>Improving Formatting using CSS</h1>
+	<p>
+		Change the formatting of your work by writing CSS code.
+	</p>
+	<ul>
+		<li>
+			CSS code is written in blocks.
+		</li>
+		<li>
+			Each block begins with a <dfn>selector</dfn>, which describes which parts of the document need restyling.
+		</li>
+		<li>
+			Inside a block, each line includes:
+			<ol>
+				<li>a <dfn>property name</dfn> that describes which aspect of the formatting should be changed, and,</li>
+				<li>a <dfn>property value</dfn>, which gives the exact color, measurement, font name, etc.</li>
+			</ol>
+		</li>
+	</ul>
+	<p>
+		For example:
+	</p>
+<pre><code>
+h2 {
+	background-color: rgb(255, 160, 120);
+	font-family: cursive;
+	padding: 5pt;
+}
 </code></pre>
-			<blockquote class="blockquote bg-light">
-				The proof is via Pythagoras Theorem (Equation&nbsp;\ref{pythag}).
+</article>
 
-				\begin{equation}\label{pythag}
-					a^2 = b^2 + c^2
-				\end{equation}
-			</blockquote>
-			<p>
-				Using <code>\ref</code> and <code>\label</code> is optional. Use <code>equation*</code> in place of <code>equation</code> to avoid giving the equation an equation number.
-			</p>
-			<p>
-				If you need to include an actual \$ symbol in a document that uses MathJax then you'll need include a backslash before it to prevent the \$ sign from being interpreted as the beginning of a piece of math.
-			</p>
-<pre class="text-pre-wrap"><code>
-	I rode the bus today and it cost me \$3.
-</code></pre>
-			<p>
-				Documentation:
-			</p>
-			<ul>
-				<li><a href="https://en.wikibooks.org/wiki/LaTeX/Mathematics">Wikibooks LaTeX/Mathematics</a></li>
-				<li><a href="https://en.wikibooks.org/wiki/LaTeX/Advanced_Mathematics">Wikibooks LaTeX/Advanced Mathematics</a></li>
-				<li><a href="https://docs.mathjax.org/en/latest/index.html">MathJax documentation</a></li>
-				<li><a href="http://mirrors.ctan.org/macros/latex/required/amsmath/amsmath.pdf">amsmath technical documentation</a></li>
-				<li><a href="http://mirrors.ctan.org/fonts/amsfonts/doc/amsfndoc.pdf">User's Guide to AMSFonts (includes amssymb)</a></li>
+<article id="head">
+	<h1>Changing Document Options</h1>
+
+	<h2>Libraries &amp; Toolkits</h2>
+	<p>
+		Choose options from this section to attach third-party code to your document to help automate common tasks.
+	</p>
+
+	<h3>jQuery</h3>
+	<ul>
+		<li>
+			For changing the document content and styling dynamically (e.g. in response to mouse clicks).
+		</li>
+		<li>
+			The slim build doesn't include any <a href="https://api.jquery.com/category/ajax">AJAX</a> or <a href="https://api.jquery.com/category/effects">animation effect</a> functionality.
+		</li>
+		<li>
+			Documentation: <a href="https://jquery.com">jquery.com</a>
+		</li>
+	</ul>
+
+	<h3>Bootstrap</h3>
+	<ul>
+		<li>
+			Gives documents a modern look that's consistent across different devices and browsers.
+		</li>
+		<li>
+			To enable everything Bootstrap is capable of providing choose the CSS&nbsp;+&nbsp;JS option and tick the Popper.js box.
+		</li>
+		<li>
+			Documentation: <a href="https://getbootstrap.com/docs/4.1/layout/overview">getbootstrap.com</a>
+		</li>
+	</ul>
+
+	<h3>Popper.js</h3>
+	<ul>
+		<li>
+			Lets you add popover, drop-down and tooltip elements to your graphical user interface.
+		</li>
+		<li>
+			Can be used in combination with Bootstrap or standalone.
+		</li>
+		<li>
+			Documentation:
+			<ul class="list-inline d-inline">
+				<li class="list-inline-item"><a href="https://getbootstrap.com/docs/4.1/components/popovers">popovers</a></li>
+				<li class="list-inline-item"><a href="https://getbootstrap.com/docs/4.1/components/dropdowns">drop-down menus</a></li>
+				<li class="list-inline-item"><a href="https://getbootstrap.com/docs/4.1/components/tooltips">tooltips</a></li>
+				<li class="list-inline-item"><a href="https://popper.js.org">standalone</a></li>
 			</ul>
-		</article>
-	</div>
+		</li>
+	</ul>
+
+	<h3>MathJax</h3>
+	<p>
+		MathJax lets you use the math commands from the LaTeX language to include equations and theorems in your documents. It also supports the amsmath and amssymb LaTeX extension packages.
+	</p>
+	<p>
+		Insert math inside a paragraph by writing it between two <code>$</code> signs.
+	</p>
+<pre class="text-pre-wrap"><code>
+&lt;p&gt;
+	Pythagoras's theorem, usually quoted as $a^2&nbsp;= b^2&nbsp;+ c^2$, informs us that the square of the length of the hypotenuse of a right-angled triangle is equal to the sum of the squares of the other two side lengths.
+&lt;/p&gt;
+</code></pre>
+	<blockquote class="blockquote bg-light">
+		Pythagoras's theorem, usually quoted as $a^2 = b^2 + c^2$, informs us that the
+		square of the length of the hypotenuse of a right-angled triangle is equal to the
+		sum of the squares of the other two side lengths.
+	</blockquote>
+	<p>
+		Or place an equation on a line of its own using <code>\begin{equation}</code>&hellip; <code>\end{equation}</code>.
+	</p>
+<pre class="text-pre-wrap"><code>
+&lt;p&gt;
+	The proof is via Pythagoras Theorem (Equation&amp;nbsp;\ref{pythag}).
+&lt;/p&gt;
+
+\begin{equation}\label{pythag}
+	a^2&nbsp;= b^2&nbsp;+ c^2
+\end{equation}
+</code></pre>
+	<blockquote class="blockquote bg-light">
+		The proof is via Pythagoras Theorem (Equation&nbsp;\ref{pythag}).
+
+		\begin{equation}\label{pythag}
+			a^2 = b^2 + c^2
+		\end{equation}
+	</blockquote>
+	<p>
+		Using <code>\ref</code> and <code>\label</code> is optional. Use <code>equation*</code> in place of <code>equation</code> to avoid giving the equation an equation number.
+	</p>
+	<p>
+		If you need to include an actual \$ symbol in a document that uses MathJax then you'll need include a backslash before it to prevent the \$ sign from being interpreted as the beginning of a piece of math.
+	</p>
+<pre class="text-pre-wrap"><code>
+I rode the bus today and it cost me \$3.
+</code></pre>
+	<p>
+		Documentation:
+	</p>
+	<ul>
+		<li><a href="https://en.wikibooks.org/wiki/LaTeX/Mathematics">Wikibooks LaTeX/Mathematics</a></li>
+		<li><a href="https://en.wikibooks.org/wiki/LaTeX/Advanced_Mathematics">Wikibooks LaTeX/Advanced Mathematics</a></li>
+		<li><a href="https://docs.mathjax.org/en/latest/index.html">MathJax documentation</a></li>
+		<li><a href="http://mirrors.ctan.org/macros/latex/required/amsmath/amsmath.pdf">amsmath technical documentation</a></li>
+		<li><a href="http://mirrors.ctan.org/fonts/amsfonts/doc/amsfndoc.pdf">User's Guide to AMSFonts (includes amssymb)</a></li>
+	</ul>
+</article>
+<script>
+let currentArticle = document.getElementById(document.location.hash.slice(1));
+currentArticle.style.display = 'block';
+
+window.onhashchange = function (event) {
+	currentArticle.style.display = '';
+	currentArticle = document.getElementById(document.location.hash.slice(1));
+	currentArticle.style.display = 'block';
+}
+</script>
 </body>
 </html>
