@@ -2,16 +2,22 @@
 <html>
 <head>
 	<title></title>
+	<script src="../mathjax-config.js"></script>
+	<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js"></script>
 	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"/>
+	<link href="help.css" rel="stylesheet"/>
 </head>
 <body>
 	<div class="container">
 		<article id="content">
 			<h1>Writing Content Using HTML</h1>
 			<p>
-				Compose your manuscript by typing into the panel opposite. Use HTML tags to describe the semantic structure of your work. For example:
+				Compose your manuscript by typing into the panel opposite. Use HTML tags to describe the semantic structure of your work.
 			</p>
-	<pre><code>
+			<p>
+				For example:
+			</p>
+	<pre class="text-pre-wrap"><code>
 	&lt;h2&gt;
 		This Is A Heading
 	&lt;/h2&gt;
@@ -23,7 +29,7 @@
 	&lt;/p&gt;
 	</code></pre>
 			<p>
-				You can see the result by clicking on the Preview tab.
+				You can see your code transformed into the completed document by clicking on the Preview tab.
 			</p>
 			<p>
 				Don't include the following tags in your code: <code>&lt;!DOCTYPE&gt;</code>, <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code>, <code>&lt;title&gt;</code>, <code>&lt;body&gt;</code>, <code>&lt;base&gt;</code> or <code>&lt;meta&gt;</code>. These will be inserted automatically.
@@ -62,7 +68,7 @@
 	</code></pre>
 		</article>
 
-		<article>
+		<article id="head">
 			<h1>Changing Document Options</h1>
 
 			<h2>Libraries &amp; Toolkits</h2>
@@ -106,13 +112,69 @@
 				</li>
 				<li>
 					Documentation:
-					<ul class="list-inline">
+					<ul class="list-inline d-inline">
 						<li class="list-inline-item"><a href="https://getbootstrap.com/docs/4.1/components/popovers">popovers</a></li>
 						<li class="list-inline-item"><a href="https://getbootstrap.com/docs/4.1/components/dropdowns">drop-down menus</a></li>
 						<li class="list-inline-item"><a href="https://getbootstrap.com/docs/4.1/components/tooltips">tooltips</a></li>
 						<li class="list-inline-item"><a href="https://popper.js.org">standalone</a></li>
 					</ul>
 				</li>
+			</ul>
+
+			<h3>MathJax</h3>
+			<p>
+				MathJax lets you use the math commands from the LaTeX language to include equations and theorems in your documents. It also supports the amsmath and amssymb LaTeX extension packages.
+			</p>
+			<p>
+				Insert math inside a paragraph by writing it between two <code>$</code> signs.
+			</p>
+<pre class="text-pre-wrap"><code>
+	&lt;p&gt;
+		Pythagoras's theorem, usually quoted as $a^2&nbsp;= b^2&nbsp;+ c^2$, informs us that the square of the length of the hypotenuse of a right-angled triangle is equal to the sum of the squares of the other two side lengths.
+	&lt;/p&gt;
+</code></pre>
+			<blockquote class="blockquote bg-light">
+				Pythagoras's theorem, usually quoted as $a^2 = b^2 + c^2$, informs us that the
+				square of the length of the hypotenuse of a right-angled triangle is equal to the
+				sum of the squares of the other two side lengths.
+			</blockquote>
+			<p>
+				Or place an equation on a line of its own using <code>\begin{equation}</code>&hellip; <code>\end{equation}</code>.
+			</p>
+<pre class="text-pre-wrap"><code>
+	&lt;p&gt;
+		The proof is via Pythagoras Theorem (Equation&amp;nbsp;\ref{pythag}).
+	&lt;/p&gt;
+
+	\begin{equation}
+		a^2&nbsp;= b^2&nbsp;+ c^2
+	\end{equation}
+</code></pre>
+			<blockquote class="blockquote bg-light">
+				The proof is via Pythagoras Theorem (Equation&nbsp;\ref{pythag}).
+
+				\begin{equation} \label{pythag}
+					a^2 = b^2 + c^2
+				\end{equation}
+			</blockquote>
+			<p>
+				Using <code>\ref</code> and <code>\label</code> is optional. Use <code>equation*</code> in place of <code>equation</code> to avoid giving the equation an equation number.
+			</p>
+			<p>
+				If you need to include an actual \$ symbol in a document that uses MathJax then you'll need include a backslash before it to prevent the \$ sign from being interpreted as the beginning of a piece of math.
+			</p>
+<pre class="text-pre-wrap"><code>
+	I rode the bus today and it cost me \$3.
+</code></pre>
+			<p>
+				Documentation:
+			</p>
+			<ul>
+				<li><a href="https://en.wikibooks.org/wiki/LaTeX/Mathematics">Wikibooks LaTeX/Mathematics</a></li>
+				<li><a href="https://en.wikibooks.org/wiki/LaTeX/Advanced_Mathematics">Wikibooks LaTeX/Advanced Mathematics</a></li>
+				<li><a href="https://docs.mathjax.org/en/latest/index.html">MathJax documentation</a></li>
+				<li><a href="http://mirrors.ctan.org/macros/latex/required/amsmath/amsmath.pdf">amsmath technical documentation</a></li>
+				<li><a href="http://mirrors.ctan.org/fonts/amsfonts/doc/amsfndoc.pdf">User's Guide to AMSFonts (includes amssymb)</a></li>
 			</ul>
 		</article>
 	</div>
