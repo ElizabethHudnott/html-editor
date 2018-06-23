@@ -2,10 +2,6 @@ iframe {
 	border: none;
 }
 
-.flex-grow {
-	flex-grow: 1;
-}
-
 .full-height {
 	bottom: 0;
 	height: 100%;

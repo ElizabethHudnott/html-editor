@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="UTF-8"/>
 	<title>Web Page Editor</title>
 </head>
 <body>
@@ -21,82 +22,98 @@
 				</li>
 			</ul>
 		</nav>
-		<div class="tab-content flex-grow position-relative border-left" id="left-pane" style="border-right-style: ridge;">
+		<div class="tab-content flex-grow-1 position-relative border-left" id="left-pane" style="border-right-style: ridge;">
 			<div class="tab-pane p-3 w-100 full-height" id="head" role="tabpanel" aria-labelledby="head-tab">
 				<h2>Title</h2>
-				<table class="form-group table table-borderless">
-					<colgroup>
-						<col style="width: 15%"/>
-						<col/>
-					</colgroup>
-					<tr>
-						<th>
-							<label for="head-title">Tab Name</label>
-						</th>
-						<td>
-							<input id="head-title" class="form-control"/>
-						</td>
-					</tr>
-				</table>
+				<fieldset class="container-fluid">
+					<div class="form-group row">
+						<label for="opt-h1-title" class="col-lg-3 col-md-12 col-form-label">
+							Document Title
+						</label>
+						<div class="col-lg-9 col-md-12">
+							<input id="opt-h1-title" class="form-control"/>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="opt-head-title" class="col-lg-3 col-md-12 col-form-label">
+							Tab Name
+						</label>
+						<div class="col-lg-9 col-md-12">
+							<input id="opt-head-title" disabled class="form-control"/>
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-3">
+						</div>
+						<div class="col-lg-9 col-md-12">
+							<div class="form-check">
+								<input type="checkbox" id="opt-sync-title" checked class="form-check-input"/>
+								<label for="opt-sync-title" class="form-check-label">Synchronize with document title</label>
+							</div>
+						</div>
+					</div>
+				</fieldset>
 
 				<h2>Libraries &amp; Toolkits</h2>
-				<table class="table">
-					<tr id="opt-jquery">
-						<th>jQuery</th>
-						<td>
-							<label class="m-0">
-								<input type="radio" name="jquery" value="none" id="opt-jquery-none" checked/>
-								None
-							</label>
-						</td>
-						<td>
-							<label class="m-0">
-								<input type="radio" name="jquery" value="jQuerySlim" id="opt-jquery-slim"/>
-								Slim
-							</label>
-						</td>
-						<td>
-							<label class="m-0">
-								<input type="radio" name="jquery" value="jQuery"/>
-								Full
-							</label>
-						</td>
-					</tr>
-					<tr id="opt-bootstrap">
-						<th>Bootstrap</th>
-						<td>
-							<label class="m-0">
-								<input type="radio" name="bootstrap" value="none" checked/>
-								None
-							</label>
-						</td>
-						<td>
-							<label class="m-0">
-								<input type="radio" name="bootstrap" value="bootstrap"/>
-								Core CSS
-							</label>
-						</td>
-						<td>
-							<label class="m-0">
-								<input type="radio" name="bootstrap" value="bootstrapFull"/>
-								CSS + JS
-							</label>
-						</td>
-					</tr>
-					<tr>
-						<th>Other</th>
-						<td colspan="3">
-							<div class="form-check">
-								<input type="checkbox" id="opt-popper" class="form-check-input"/>
-								<label for="opt-popper" class="form-check-label">Popper.js</label>
-							</div>
-							<div class="form-check">
-								<input type="checkbox" id="opt-mathjax" class="form-check-input"/>
-								<label for="opt-mathjax" class="form-check-label">MathJax (LaTeX math)</label>
-							</div>
-						</td>
-					</tr>
-				</table>
+				<div class="container-fluid">
+					<table class="table">
+						<tr id="opt-jquery">
+							<th>jQuery</th>
+							<td>
+								<label class="m-0">
+									<input type="radio" name="jquery" value="none" id="opt-jquery-none" checked/>
+									None
+								</label>
+							</td>
+							<td>
+								<label class="m-0">
+									<input type="radio" name="jquery" value="jQuerySlim" id="opt-jquery-slim"/>
+									Slim
+								</label>
+							</td>
+							<td>
+								<label class="m-0">
+									<input type="radio" name="jquery" value="jQuery"/>
+									Full
+								</label>
+							</td>
+						</tr>
+						<tr id="opt-bootstrap">
+							<th>Bootstrap</th>
+							<td>
+								<label class="m-0">
+									<input type="radio" name="bootstrap" value="none" checked/>
+									None
+								</label>
+							</td>
+							<td>
+								<label class="m-0">
+									<input type="radio" name="bootstrap" value="bootstrap"/>
+									Core CSS
+								</label>
+							</td>
+							<td>
+								<label class="m-0">
+									<input type="radio" name="bootstrap" value="bootstrapFull"/>
+									CSS + JS
+								</label>
+							</td>
+						</tr>
+						<tr>
+							<th>Other</th>
+							<td colspan="3">
+								<div class="form-check">
+									<input type="checkbox" id="opt-popper" class="form-check-input"/>
+									<label for="opt-popper" class="form-check-label">Popper.js</label>
+								</div>
+								<div class="form-check">
+									<input type="checkbox" id="opt-mathjax" class="form-check-input"/>
+									<label for="opt-mathjax" class="form-check-label">MathJax (LaTeX math)</label>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -111,9 +128,14 @@
 				</li>
 			</ul>
 		</nav>
-		<div class="tab-content flex-grow position-relative border-left border-right" id="right-pane">
-			<iframe class="tab-pane w-100 full-height" id="preview" role="tabpanel" aria-labelledby="preview-tab" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-scripts"></iframe>
-			<!-- Don't allow: Payment API, modals, screen orientation lock, same-origin, top navigation -->
+		<div class="tab-content flex-grow-1 position-relative border-left border-right" id="right-pane">
+			<div class="tab-pane w-100 full-height d-flex flex-column" role="tabpanel" aria-labelledby="preview-tab" id="preview">
+				<header class="network-header">
+					<h1 id="title"></h1>
+				</header>
+				<iframe class="flex-grow-1" id="preview-frame" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-scripts"></iframe>
+				<!-- Don't allow: Payment API, modals, screen orientation lock, same-origin, top navigation -->
+			</div>
 			<iframe class="tab-pane show active w-100 full-height" id="help" role="tabpanel" aria-labelledby="help-tab" src="help/index.html#content"></iframe>
 		</div>
 	</div>
@@ -167,6 +189,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 
 <!-- The application -->
+<link rel="stylesheet" href="network.css"/>
 <link rel="stylesheet" href="site.css"/>
 <link rel="stylesheet" href="edit.css"/>
 <script src="util.js"></script>

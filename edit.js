@@ -60,7 +60,7 @@ function createTab(paneName, tabName, tabTitle, active, beforeTab) {
 
 function createEditor(container, mode) {
 	let editor = CodeMirror(function (element) {
-			element.classList.add('flex-grow');
+			element.classList.add('flex-grow-1');
 			container.appendChild(element);
 		}, {
 		autoCloseBrackets: '()[]{}\'\'""',
@@ -99,7 +99,7 @@ function createEditor(container, mode) {
 
 	let searchBox = document.createElement('input');
 	searchBox.setAttribute('type', 'search');
-	searchBox.setAttribute('class', 'form-control search flex-grow mx-1');
+	searchBox.setAttribute('class', 'form-control search flex-grow-1 mx-1');
 	searchBox.setAttribute('placeholder', 'Search');
 	searchBox.setAttribute('aria-label', 'Search');
 	searchPanel.appendChild(searchBox);
@@ -179,20 +179,77 @@ $(headTab).on('show.bs.tab', function (event) {
 });
 
 //Preview
-let previewFrame = document.getElementById('preview');
+let previewTab = $('#preview-tab');
+let previewVisible = previewTab.hasClass('show');
+let previewDirty = false;
+
+let previewFrame = document.getElementById('preview-frame');
 let head = '';
 
 function updatePreview() {
 	let html = htmlEditor.getValue();
 	let css = cssEditor.getValue();
-	previewFrame.srcdoc = `<head>${head}<style>${css}</style></head>${html}`;
+	previewFrame.srcdoc = `
+		<!DOCTYPE html>
+		<html>
+			<head>
+				<meta charset="UTF-8">
+				${head}
+				<style>
+					${css}
+				</style>
+			</head>
+			<body>
+				<main>
+					${html}
+				</main>
+			</body>
+		</html>
+	`;
+	previewDirty = false;
 }
 
 let previewTimer;
 function queuePreview() {
-	clearTimeout(previewTimer);
-	previewTimer = setTimeout(updatePreview, 300);
+	previewDirty = true;
+	if (previewVisible) {
+		clearTimeout(previewTimer);
+		previewTimer = setTimeout(updatePreview, 300);
+	}
 }
+
+previewTab.on('show.bs.tab', function (event) {
+	previewVisible = true;
+	if (previewDirty) {
+		updatePreview();
+	}
+});
+
+previewTab.on('hide.bs.tab', function (event) {
+	previewVisible = false;
+	clearTimeout(previewTimer);
+});
+
+let optH1Title = document.getElementById('opt-h1-title');
+let optHeadTitle = document.getElementById('opt-head-title');
+let optSyncTitle = document.getElementById('opt-sync-title');
+let h1Title = document.getElementById('title');
+
+optH1Title.addEventListener('input', function (event) {
+	let title = event.target.value;
+	if (optSyncTitle.checked) {
+		optHeadTitle.value = title;
+	}
+	h1Title.innerHTML = escapeHTML(title);
+});
+
+optSyncTitle.addEventListener('input', function (event) {
+	let checked = event.target.checked;
+	optHeadTitle.disabled = checked;
+	if (checked) {
+		optHeadTitle.value = optH1Title.value;
+	}
+});
 
 let optJQuery = $('#opt-jquery input');
 let optJQueryNone = document.getElementById('opt-jquery-none');
@@ -233,3 +290,10 @@ optMathJax.addEventListener('input', updateLibraries);
 
 htmlEditor.on("change", queuePreview);
 cssEditor.on("change", queuePreview);
+
+$(document).ready(function () {
+	optH1Title.value = '';
+	optHeadTitle.value = '';
+	optSyncTitle.checked = true;
+	updatePreview();
+});
