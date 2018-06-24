@@ -9,6 +9,10 @@ const libraryHTML = Object.freeze({
 	popperJS: '<script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>\n',
 });
 
+//Maps editor DOM elements to editors.
+let editors = new Map();
+
+//Maps editors to app-specific data.
 let paneData = new Map();
 
 //Search
@@ -59,9 +63,11 @@ function createTab(paneName, tabName, tabTitle, active, beforeTab) {
 }
 
 function createEditor(container, mode) {
+	let editorDOM;
 	let editor = CodeMirror(function (element) {
 			element.classList.add('flex-grow-1');
 			container.appendChild(element);
+			editorDOM = element;
 		}, {
 		autoCloseBrackets: '()[]{}\'\'""',
 		matchBrackets: true,
@@ -88,6 +94,7 @@ function createEditor(container, mode) {
 		tabSize: 4,
 		theme: 'eclipse',
 	});
+	editors.set(editorDOM, editor);
 
 	let searchPanelOuter = document.createElement('div');
 	searchPanelOuter.setAttribute('class', 'd-none d-print-none');
@@ -155,6 +162,14 @@ function createEditor(container, mode) {
 	return editor;
 } //End createEditor function
 
+//After clicking on the preview or help tabs, restore the keyboard focus to the appropriate editor.
+function setFocus() {
+	let editorDOMs = $('#left-pane>.show .CodeMirror');
+	if (editorDOMs.length > 0) {
+		editors.get(editorDOMs[0]).focus();
+	}
+}
+
 let headTab = document.getElementById('head-tab');
 let [htmlTab, htmlEditorContainer] = createTab('left-pane', 'content', 'Content', true, headTab);
 let [cssTab, cssEditorContainer] = createTab('left-pane', 'style', 'Style', false, headTab);
@@ -178,10 +193,12 @@ $(headTab).on('show.bs.tab', function (event) {
 	helpFrame.src = 'help/index.html#head';
 });
 
+$('#help-tab').on('show.bs.tab', setFocus);
+
 //Preview
 let previewTab = $('#preview-tab');
 let previewVisible = previewTab.hasClass('show');
-let previewDirty = true;
+let previewDirty = true; //Firefox restores previous content on page refresh.
 
 let previewFrame = document.getElementById('preview-frame');
 let head = '';
@@ -219,6 +236,7 @@ function queuePreview() {
 }
 
 previewTab.on('show.bs.tab', function (event) {
+	setFocus();
 	previewVisible = true;
 	if (previewDirty) {
 		updatePreview();
