@@ -292,8 +292,5 @@ htmlEditor.on("change", queuePreview);
 cssEditor.on("change", queuePreview);
 
 $(document).ready(function () {
-	optH1Title.value = '';
-	optHeadTitle.value = '';
-	optSyncTitle.checked = true;
-	updatePreview();
+	headTab.reset();
 });
