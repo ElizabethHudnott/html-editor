@@ -189,11 +189,14 @@ cssTab.on('shown.bs.tab', function (event) {
 	helpFrame.src = 'help/index.html#style';
 });
 
+document.getElementById('head').reset();
+
 $(headTab).on('show.bs.tab', function (event) {
 	helpFrame.src = 'help/index.html#head';
 });
 
 $('#help-tab').on('show.bs.tab', setFocus);
+helpFrame.src = 'help/index.html#content';
 
 //Preview
 let previewTab = $('#preview-tab');
@@ -308,7 +311,3 @@ optMathJax.addEventListener('input', updateLibraries);
 
 htmlEditor.on("change", queuePreview);
 cssEditor.on("change", queuePreview);
-
-$(document).ready(function () {
-	document.getElementById('head').reset();
-});
