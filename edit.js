@@ -181,7 +181,7 @@ $(headTab).on('show.bs.tab', function (event) {
 //Preview
 let previewTab = $('#preview-tab');
 let previewVisible = previewTab.hasClass('show');
-let previewDirty = false;
+let previewDirty = true;
 
 let previewFrame = document.getElementById('preview-frame');
 let head = '';
@@ -292,5 +292,5 @@ htmlEditor.on("change", queuePreview);
 cssEditor.on("change", queuePreview);
 
 $(document).ready(function () {
-	headTab.reset();
+	document.getElementById('head').reset();
 });
