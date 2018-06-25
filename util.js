@@ -22,8 +22,8 @@ function escapeHTML(input) {
 }
 
 function findCheckedRadioButton(buttons) {
-	for (let i = 0; i < buttons.length; i++) {
-		let button = buttons[i];
+	'use strict';
+	for (let button of buttons) {
 		if (button.checked) {
 			return button.value;
 		}

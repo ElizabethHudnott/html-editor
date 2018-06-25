@@ -141,6 +141,50 @@
 	</div>
 </div>
 
+<div class="d-none">
+	<div id="html-toolbar" class="btn-toolbar bg-light p-1" role="toolbar">
+		<div class="btn-group btn-group-sm" role="group" aria-label="HTML tag insertion">
+			<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#insert-modal">&lt;&gt;</button>
+		</div>
+	</div>
+</div>
+
+<div id="insert-modal" class="modal" tabindex="-1" role="dialog" aria-labelledby="insert-modal-heading" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="insert-modal-heading">HTML Tags</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body d-flex p-0">
+				<ul class="nav flex-column nav-pills bg-secondary text-center px-2 py-1" role="tablist" aria-orientation="vertical">
+					<li class="nav-item">
+						<a class="nav-link" id="insert-heading-tab" data-toggle="pill" href="#insert-heading" role="tab" aria-controls="insert-heading" aria-selected="false">Headings</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" id="insert-paragraph-tab" data-toggle="pill" href="#insert-paragraph" role="tab" aria-controls="insert-paragraph" aria-selected="true">Paragraphs</a>
+					</li>
+				</ul>
+				<div class="p-2">
+					<div class="tab-content">
+						<div class="tab-pane" id="insert-heading" role="tabpanel" aria-labelledby="insert-heading-tab">
+							Headings...
+						</div>
+						<div class="tab-pane show active" id="insert-paragraph" role="tabpanel" aria-labelledby="insert-paragraph-tab">
+							Paragraphs...
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 <!-- CodeMirror framework core -->
 <link rel="stylesheet" href="lib/codemirror/codemirror.css"/>
 <link rel="stylesheet" href="lib/codemirror/theme/eclipse.css"/>

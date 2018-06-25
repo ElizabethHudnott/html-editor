@@ -2,13 +2,17 @@ iframe {
 	border: none;
 }
 
+.bg-secondary a {
+	color: rgba(255, 255, 255, 0.5);
+}
+
+.nav-tabs .nav-link {
+    border-color: #e9ecef #e9ecef #dee2e6;
+}
+
 .full-height {
 	bottom: 0;
 	height: 100%;
 	position: absolute;
 	top: 0;
-}
-
-.nav-tabs .nav-link {
-    border-color: #e9ecef #e9ecef #dee2e6;
 }

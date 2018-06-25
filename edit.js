@@ -175,6 +175,7 @@ let [htmlTab, htmlEditorContainer] = createTab('left-pane', 'content', 'Content'
 let [cssTab, cssEditorContainer] = createTab('left-pane', 'style', 'Style', false, headTab);
 let helpFrame = document.getElementById('help');
 
+htmlEditorContainer.appendChild(document.getElementById('html-toolbar'));
 let htmlEditor = createEditor(htmlEditorContainer, 'text/html');
 let cssEditor = createEditor(cssEditorContainer, 'text/css');
 htmlEditor.focus();
