@@ -145,7 +145,7 @@
 	<div id="html-toolbar" class="toolbar-area bg-light">
 		<div class="btn-toolbar p-1" role="toolbar">
 			<div class="btn-group btn-group-sm" role="group" aria-label="HTML tag insertion">
-				<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#insert-modal">&lt;&gt;</button>
+				<button type="button" class="btn btn-secondary" id="insert-button" data-toggle="modal" data-target="#insert-modal" title="Insert new content">&lt;&gt;</button>
 			</div>
 		</div>
 	</div>
@@ -171,37 +171,42 @@
 						</li>
 					</ul>
 				</nav>
-				<div class="tab-content p-3">
+				<div class="tab-content p-3" id="insert-modal-content">
 					<div class="tab-pane" id="insert-heading" role="tabpanel" aria-labelledby="insert-heading-tab">
 						<menu class="menu-buttons">
-							<button class="btn btn-light d-flex justify-content-between">
+							<button class="btn btn-light d-flex justify-content-between" onclick="insertHTML('h2')">
 								<div class="menu-button-name">Heading</div>
 								<div><span class="badge badge-pill badge-info">&lt;h2&gt;</span></div>
 							</button>
-							<button class="btn btn-light d-flex justify-content-between">
+							<button class="btn btn-light d-flex justify-content-between" onclick="insertHTML('h3')">
 								<div class="menu-button-name">Subheading</div>
 								<div><span class="badge badge-pill badge-info">&lt;h3&gt;</span></div>
 							</button>
-							<button class="btn btn-light d-flex justify-content-between">
+							<button class="btn btn-light d-flex justify-content-between" onclick="insertHTML('h4')">
 								<div class="menu-button-name">Sub-Subheading</div>
 								<div><span class="badge badge-pill badge-info">&lt;h4&gt;</span></div>
 							</button>
-							<button class="btn btn-light d-flex justify-content-between">
+							<button class="btn btn-light d-flex justify-content-between" onclick="insertHTML('h5')">
 								<div class="menu-button-name">Paragraph Title</div>
 								<div><span class="badge badge-pill badge-info">&lt;h5&gt;</span></div>
 							</button>
-							<button class="btn btn-light d-flex justify-content-between">
+							<button class="btn btn-light d-flex justify-content-between" onclick="insertHTML('h6')">
 								<div class="menu-button-name">Subparagraph</div>
 								<div><span class="badge badge-pill badge-info">&lt;h6&gt;</span></div>
 							</button>
-							<button class="btn btn-light d-flex justify-content-between">
+							<button class="btn btn-light d-flex justify-content-between" onclick="insertHTML('h1')">
 								<div class="menu-button-name">Chapter Title</div>
 								<div><span class="badge badge-pill badge-info">&lt;h1&gt;</span></div>
 							</button>
 						</menu>
 					</div>
 					<div class="tab-pane show active" id="insert-paragraph" role="tabpanel" aria-labelledby="insert-paragraph-tab">
-
+						<menu class="menu-buttons">
+							<button class="btn btn-light d-flex justify-content-between" onclick="insertHTML('p')">
+								<div class="menu-button-name">Paragraph</div>
+								<div><span class="badge badge-pill badge-info">&lt;p&gt;</span></div>
+							</button>
+						</menu>
 					</div>
 				</div>
 			</div>
@@ -256,7 +261,6 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
 
 <!-- Bootstrap -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 
 <!-- The application -->
@@ -264,6 +268,7 @@
 <link rel="stylesheet" href="site.css"/>
 <link rel="stylesheet" href="edit.css"/>
 <script src="util.js"></script>
+<script src="jquery-extensions.js"></script>
 <script src="edit.js"></script>
 
 </body>

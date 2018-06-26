@@ -200,6 +200,28 @@ $(headTab).on('show.bs.tab', function (event) {
 $('#help-tab').on('show.bs.tab', setFocus);
 helpFrame.src = 'help/index.html#content';
 
+//Document title
+let optH1Title = document.getElementById('opt-h1-title');
+let optHeadTitle = document.getElementById('opt-head-title');
+let optSyncTitle = document.getElementById('opt-sync-title');
+let h1Title = document.getElementById('title');
+
+optH1Title.addEventListener('input', function (event) {
+	let title = event.target.value;
+	if (optSyncTitle.checked) {
+		optHeadTitle.value = title;
+	}
+	h1Title.innerHTML = escapeHTML(title);
+});
+
+optSyncTitle.addEventListener('input', function (event) {
+	let checked = event.target.checked;
+	optHeadTitle.disabled = checked;
+	if (checked) {
+		optHeadTitle.value = optH1Title.value;
+	}
+});
+
 //Preview
 let previewTab = $('#preview-tab');
 let previewVisible = previewTab.hasClass('show');
@@ -253,27 +275,6 @@ previewTab.on('hide.bs.tab', function (event) {
 	clearTimeout(previewTimer);
 });
 
-let optH1Title = document.getElementById('opt-h1-title');
-let optHeadTitle = document.getElementById('opt-head-title');
-let optSyncTitle = document.getElementById('opt-sync-title');
-let h1Title = document.getElementById('title');
-
-optH1Title.addEventListener('input', function (event) {
-	let title = event.target.value;
-	if (optSyncTitle.checked) {
-		optHeadTitle.value = title;
-	}
-	h1Title.innerHTML = escapeHTML(title);
-});
-
-optSyncTitle.addEventListener('input', function (event) {
-	let checked = event.target.checked;
-	optHeadTitle.disabled = checked;
-	if (checked) {
-		optHeadTitle.value = optH1Title.value;
-	}
-});
-
 let optJQuery = $('#opt-jquery input');
 let optJQueryNone = document.getElementById('opt-jquery-none');
 let optJQuerySlim = document.getElementById('opt-jquery-slim');
@@ -313,3 +314,79 @@ optMathJax.addEventListener('input', updateLibraries);
 
 htmlEditor.on("change", queuePreview);
 cssEditor.on("change", queuePreview);
+
+let insertModal = $('#insert-modal');
+insertModal.on('shown.bs.modal', function () {
+	makeSameHeight($('#insert-modal-content'));
+});
+
+//Don't put any tabs or spaces at the beginning of a new line.
+let htmlTemplates = {
+	h1: '<h1>\n$1\n</h1>\n',
+	h2: '\n<h2>\n$1\n</h2>\n',
+	h3: '\n<h3>\n$1\n</h3>\n',
+	h4: '\n<h4>\n$1\n</h4>\n',
+	h5: '\n<h5>$1</h5>\n',
+	h6: '\n<h6>$1</h6>\n',
+	p: '<p>\n$1\n</p>\n',
+};
+
+function insertHTML(templateName) {
+	let replacement = htmlTemplates[templateName];
+	/*	Check if the replacement pattern contains newline characters and also if it ends with a
+		newline character.
+	*/
+	let newlineAfter = false;
+	if (replacement.slice(-1) === '\n') {
+		replacement = replacement.slice(0, -1);
+		newlineAfter = true;
+	}
+
+	let hasNewlines = replacement.indexOf('\n') !== -1;
+	let selectionStart = htmlEditor.getCursor('from');
+
+	/*	If it's a multi-line replace and we're not currently at the beginning of a line then
+		include an extra newline character at the beginning.
+	*/
+	if (hasNewlines || newlineAfter) {
+		let charsBefore = htmlEditor.getRange({line: selectionStart.line, ch: 0}, selectionStart);
+		if (!/^\s*$/.test(charsBefore)) {
+			replacement = '\n' + replacement;
+		}
+	}
+
+	//Replace any occurrences of $1 in the replace with the text that's currently selected.
+	let selection = htmlEditor.getSelection();
+	let varOffset = replacement.indexOf('$1');
+	if (varOffset !== -1) {
+		replacement = replacement.replace('$1', selection);
+	}
+
+	//Perform the replacement.
+	htmlEditor.replaceSelection(replacement, 'around');
+
+	//Make sure the new text is properly indented.
+	if (hasNewlines) {
+		htmlEditor.execCommand('indentAuto');
+	}
+
+	//If the replacement text ends with a newline then put one in, but make sure it's properly indented.
+	let selectionEnd = htmlEditor.getCursor('to');
+	htmlEditor.setCursor(selectionEnd);
+	if (newlineAfter) {
+		htmlEditor.execCommand('newlineAndIndent');
+	}
+
+	/*	If there wasn't any text originally selected then place the cursor in the place where
+		$1 occurred in the replacement template.
+	*/
+	if (selection === '' && varOffset !== -1) {
+		let = varPosition = htmlEditor.findPosH(selectionStart, varOffset, 'char');
+		htmlEditor.setCursor(varPosition);
+		htmlEditor.execCommand('indentAuto');
+	}
+
+	//Close the dialog.
+	insertModal.modal('hide');
+	htmlEditor.focus();
+}
