@@ -1,18 +1,59 @@
+/*
+	Element selectors
+ */
+
 iframe {
 	border: none;
 }
 
-.bg-secondary a {
-	color: rgba(255, 255, 255, 0.5);
+
+/*
+	Modifications to Bootstrap classes.
+ */
+.list-group {
+	list-style-type: none;
+}
+
+.list-group-item {
+	background-color: var(--light);
 }
 
 .nav-tabs .nav-link {
     border-color: #e9ecef #e9ecef #dee2e6;
 }
 
+
+/*
+	Additional classes.
+ */
+
 .full-height {
 	bottom: 0;
 	height: 100%;
 	position: absolute;
 	top: 0;
+}
+
+.menu-buttons {
+	display: flex;
+	align-items: stretch;
+	flex-direction: column;
+	margin: 0;
+	padding: 0;
+}
+
+.menu-buttons>* {
+	margin-bottom: 0.5rem;
+}
+
+.menu-buttons>.btn {
+	text-align: left;
+}
+
+.menu-button-name {
+	margin-right: 0.5rem;
+}
+
+.toolbar-area {
+	border-bottom: 1px solid #dee2e6;
 }

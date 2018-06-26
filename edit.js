@@ -18,7 +18,7 @@ let paneData = new Map();
 //Search
 CodeMirror.commands.find = function (editor) {
 	let searchPanel = paneData.get(editor).searchPanel;
-	searchPanel.classList.remove('d-none');
+	searchPanel.removeAttribute('hidden');
 	searchPanel.querySelector('.search').focus();
 };
 
@@ -97,7 +97,8 @@ function createEditor(container, mode) {
 	editors.set(editorDOM, editor);
 
 	let searchPanelOuter = document.createElement('div');
-	searchPanelOuter.setAttribute('class', 'd-none d-print-none');
+	searchPanelOuter.setAttribute('class', 'd-print-none');
+	searchPanelOuter.setAttribute('hidden', 'hidden');
 	container.appendChild(searchPanelOuter);
 
 	let searchPanel = document.createElement('div');
@@ -122,7 +123,7 @@ function createEditor(container, mode) {
 	closeSearchButton.innerHTML = '<span aria-hidden="true">&times;</span>';
 	searchPanel.appendChild(closeSearchButton);
 	closeSearchButton.addEventListener('click', function (event) {
-		searchPanelOuter.classList.add('d-none');
+		searchPanelOuter.setAttribute('hidden', 'hidden');
 		editor.focus();
 	});
 
