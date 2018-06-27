@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<script>
+		let previewWindow;
+		window.addEventListener('message', function (event) {
+			previewWindow = document.getElementById('preview-frame').contentWindow;
+			previewWindow.postMessage({
+				location: 'page-style',
+				operation: 'innerHTML',
+				value: 'h1 { color: red; }',
+			}, '*');
+			previewWindow.postMessage({
+				location: [1, 0],
+				operation: 'innerHTML',
+				value: '<h1>Hello World!</h1>',
+			}, '*');
+		});
+	</script>
+</head>
+<body>
+	<iframe id="preview-frame" src="../preview.html" style="width: 90vw; height: 90vh;"></iframe>
+</body>
+</html>
