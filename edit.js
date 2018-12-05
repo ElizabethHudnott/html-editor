@@ -322,13 +322,16 @@ insertModal.on('shown.bs.modal', function () {
 
 //Don't put any tabs or spaces at the beginning of a new line.
 let htmlTemplates = {
+	dl: '<dl>\n<dt></dt>\n<dd>\n\n</dd>\n<dt></dt>\n<dd>\n\n</dd>\n</dl>\n',
 	h1: '<h1>\n$1\n</h1>\n',
 	h2: '\n<h2>\n$1\n</h2>\n',
 	h3: '\n<h3>\n$1\n</h3>\n',
 	h4: '\n<h4>\n$1\n</h4>\n',
 	h5: '\n<h5>$1</h5>\n',
 	h6: '\n<h6>$1</h6>\n',
+	ol: '<ol>\n<li>\n$1\n</li>\n<li>\n\n</li>\n</ol>\n',
 	p: '<p>\n$1\n</p>\n',
+	ul: '<ul>\n<li>\n$1\n</li>\n<li>\n\n</li>\n</ul>\n',
 };
 
 function insertHTML(templateName) {
