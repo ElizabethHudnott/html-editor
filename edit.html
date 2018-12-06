@@ -176,7 +176,7 @@
 				</nav>
 				<div class="tab-content p-3" id="insert-modal-content">
 					<div class="tab-pane" id="insert-heading" role="tabpanel" aria-labelledby="insert-heading-tab">
-						<menu class="menu-buttons">
+						<div class="button-menu">
 							<button class="btn btn-light d-flex justify-content-between" onclick="insertHTML('h2')">
 								<div class="menu-button-name">Heading</div>
 								<div><span class="badge badge-pill badge-info">&lt;h2&gt;</span></div>
@@ -201,18 +201,18 @@
 								<div class="menu-button-name">Chapter Title</div>
 								<div><span class="badge badge-pill badge-info">&lt;h1&gt;</span></div>
 							</button>
-						</menu>
+						</div>
 					</div>
 					<div class="tab-pane show active" id="insert-paragraph" role="tabpanel" aria-labelledby="insert-paragraph-tab">
-						<menu class="menu-buttons">
+						<div class="button-menu">
 							<button class="btn btn-light d-flex justify-content-between" onclick="insertHTML('p')">
 								<div class="menu-button-name">Paragraph</div>
 								<div><span class="badge badge-pill badge-info">&lt;p&gt;</span></div>
 							</button>
-						</menu>
+						</div>
 					</div>
 					<div class="tab-pane show" id="insert-list" role="tabpanel" aria-labelledby="insert-list-tab">
-						<form class="menu-buttons">
+						<form class="button-menu">
 							<button class="btn btn-light d-flex justify-content-between" type="button" onclick="insertHTML('ul')">
 								<div class="menu-button-name">Bullet Points</div>
 								<div><span class="badge badge-pill badge-info">&lt;ul&gt;</span></div>
@@ -242,7 +242,11 @@
 								<div class="menu-button-name">Glossary</div>
 								<div><span class="badge badge-pill badge-info">&lt;dl&gt;</span></div>
 							</button>
-						</menu>
+							<button class="btn btn-light d-flex justify-content-between" type="button" onclick="insertHTML('nav')">
+								<div class="menu-button-name">Navigation Links</div>
+								<div><span class="badge badge-pill badge-info">&lt;nav&gt;</span></div>
+							</button>
+						</form>
 					</div>
 				</div>
 			</div>

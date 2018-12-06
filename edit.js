@@ -333,24 +333,38 @@ let htmlTemplates = {
 	h4: '\n<h4>\n$1\n</h4>\n',
 	h5: '\n<h5>$1</h5>\n',
 	h6: '\n<h6>$1</h6>\n',
-	ol: function (start, order) {
+	nav: function (selection) {
+		let str = '<nav>\n<ul class="nav">\n';
+		if (selection === '') {
+			str = str + '$1';
+		} else {
+			str = str + '<li class="nav-item">\n<a class="nav-link" href="#">$1</a>\n</li>';
+		}
+		str = str + '\n</ul>\n</nav>';
+		return str;
+	},
+	ol: function (selection, start, order) {
 			let startAttrib = start.value === '1'? '' : ` start="${start.value}"`;
 			let reversedAttrib = order.options[order.selectedIndex].value === 'up'? '' : ' reversed';
 			return `<ol${startAttrib}${reversedAttrib}>\n<li>\n$1\n</li>\n<li>\n\n</li>\n</ol>`;
-		},
+	},
 	p: '<p>\n$1\n</p>\n',
 	ul: '<ul>\n<li>\n$1\n</li>\n<li>\n\n</li>\n</ul>',
 };
 
 function insertHTML(templateName) {
-	let replacement = htmlTemplates[templateName];
+	let selection = htmlEditor.getSelection();
+	let substitution = htmlTemplates[templateName];
+	let replacement;
 
-	if (typeof(replacement) === 'function') {
-		let controls = [];
+	if (typeof(substitution) === 'function') {
+		let controls = [selection];
 		for (let i = 1; i < arguments.length; i++) {
 			controls.push(document.getElementById(arguments[i]));
 		}
-		replacement = replacement.apply(null, controls);
+		replacement = substitution.apply(null, controls);
+	} else {
+		replacement = substitution;
 	}
 
 	/*	Check if the replacement pattern contains newline characters and also if it ends with a
@@ -376,7 +390,6 @@ function insertHTML(templateName) {
 	}
 
 	//Replace any occurrences of $1 in the replace with the text that's currently selected.
-	let selection = htmlEditor.getSelection();
 	let varOffset = replacement.indexOf('$1');
 	if (varOffset !== -1) {
 		replacement = replacement.replace('$1', selection);
@@ -397,11 +410,9 @@ function insertHTML(templateName) {
 		htmlEditor.execCommand('newlineAndIndent');
 	}
 
-	/*	If there wasn't any text originally selected then place the cursor in the place where
-		$1 occurred in the replacement template.
-	*/
-	if (selection === '' && varOffset !== -1) {
-		let replacedRE = new RegExp(replacement.slice(0, varOffset).replace(/\n/g, '\n\\s*'));
+	//Place the cursor in the place where $1 occurred in the replacement template.
+	if (varOffset !== -1) {
+		let replacedRE = new RegExp(replacement.slice(0, varOffset + selection.length).replace(/\n/g, '\n\\s*'));
 		let searchCursor = htmlEditor.getSearchCursor(replacedRE, selectionStart);
 		searchCursor.findNext();
 		let varPosition = searchCursor.to();

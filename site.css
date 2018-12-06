@@ -45,7 +45,7 @@ iframe {
 	top: 0;
 }
 
-.menu-buttons {
+.button-menu {
 	display: flex;
 	align-items: stretch;
 	flex-direction: column;
@@ -53,11 +53,11 @@ iframe {
 	padding: 0;
 }
 
-.menu-buttons>* {
+.button-menu>* {
 	margin-bottom: 0.5rem;
 }
 
-.menu-buttons>.btn {
+.button-menu>.btn {
 	text-align: left;
 }
 
