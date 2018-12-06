@@ -1,0 +1,30 @@
+body {
+  --list-style-type: decimal;
+}
+
+ol {
+  list-style-type: none;
+  padding-inline-start: 40px;
+  margin-block-end: 1em;
+}
+
+ol:not(.list-continued) {
+  counter-reset: ol;
+}
+
+ol>li::before {
+  counter-increment: ol;
+  content: counter(ol, var(--list-style-type)) ".\a0";
+}
+
+ol:not(.list-inside)>li::before {
+  display: inline-block;
+  margin-left: -40px;
+  min-width: 40px;
+  text-align: end;
+}
+
+ol>li>:first-child {
+  display: inline-block;
+  margin-block-start: 0;
+}

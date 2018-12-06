@@ -2,6 +2,10 @@
 	Element selectors
  */
 
+fieldset {
+	border-radius: 0.25rem;
+}
+
 iframe {
 	border: none;
 }
@@ -10,6 +14,14 @@ iframe {
 /*
 	Modifications to Bootstrap classes.
  */
+.form-inline>label {
+	margin-right: 0.25rem;
+}
+
+.form-inline>.form-control:not(:last-child) {
+	margin-right: 0.5rem;
+}
+
 .list-group {
 	list-style-type: none;
 }

@@ -212,16 +212,33 @@
 						</menu>
 					</div>
 					<div class="tab-pane show" id="insert-list" role="tabpanel" aria-labelledby="insert-list-tab">
-						<menu class="menu-buttons">
-							<button class="btn btn-light d-flex justify-content-between" onclick="insertHTML('ul')">
+						<form class="menu-buttons">
+							<button class="btn btn-light d-flex justify-content-between" type="button" onclick="insertHTML('ul')">
 								<div class="menu-button-name">Bullet Points</div>
 								<div><span class="badge badge-pill badge-info">&lt;ul&gt;</span></div>
 							</button>
-							<button class="btn btn-light d-flex justify-content-between" onclick="insertHTML('ol')">
-								<div class="menu-button-name">Numbered List</div>
-								<div><span class="badge badge-pill badge-info">&lt;ol&gt;</span></div>
-							</button>
-							<button class="btn btn-light d-flex justify-content-between" onclick="insertHTML('dl')">
+							<fieldset class="form-group bg-secondary text-light p-3">
+								<div class="form-group">
+									<button class="btn btn-light d-flex justify-content-between w-100" type="button" onclick="insertHTML('ol', 'insert-list-start', 'insert-list-direction')">
+										<div class="menu-button-name">Numbered List</div>
+										<div><span class="badge badge-pill badge-info">&lt;ol&gt;</span></div>
+									</button>
+								</div>
+								<div class="form-group form-inline ml-4">
+									<label for="insert-list-start" class="form-label-sm">
+										From
+									</label>
+									<input class="form-control form-control-sm" id="insert-list-start" type="number" value="1" step="1" style="width: 4em"/>
+									<label for="insert-list-direction" class="form-label-sm">
+										counting
+									</label>
+									<select class="form-control form-control-sm" id="insert-list-direction">
+										<option value="up">up</option>
+										<option value="down">down</option>
+									</select>
+								</div>
+							</fieldset>
+							<button class="btn btn-light d-flex justify-content-between" type="button" onclick="insertHTML('dl')">
 								<div class="menu-button-name">Glossary</div>
 								<div><span class="badge badge-pill badge-info">&lt;dl&gt;</span></div>
 							</button>

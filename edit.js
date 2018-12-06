@@ -319,23 +319,40 @@ let insertModal = $('#insert-modal');
 insertModal.on('shown.bs.modal', function () {
 	makeSameHeight($('#insert-modal-content'));
 });
+insertModal.on('hidden.bs.modal', function () {
+	document.getElementById('insert-list-start').value = 1;
+	document.getElementById('insert-list-direction').selectedIndex = 0;
+});
 
 //Don't put any tabs or spaces at the beginning of a new line.
 let htmlTemplates = {
-	dl: '<dl>\n<dt></dt>\n<dd>\n\n</dd>\n<dt></dt>\n<dd>\n\n</dd>\n</dl>\n',
+	dl: '<dl>\n<dt></dt>\n<dd>\n\n</dd>\n<dt></dt>\n<dd>\n\n</dd>\n</dl>',
 	h1: '<h1>\n$1\n</h1>\n',
 	h2: '\n<h2>\n$1\n</h2>\n',
 	h3: '\n<h3>\n$1\n</h3>\n',
 	h4: '\n<h4>\n$1\n</h4>\n',
 	h5: '\n<h5>$1</h5>\n',
 	h6: '\n<h6>$1</h6>\n',
-	ol: '<ol>\n<li>\n$1\n</li>\n<li>\n\n</li>\n</ol>\n',
+	ol: function (start, order) {
+			let startAttrib = start.value === '1'? '' : ` start="${start.value}"`;
+			let reversedAttrib = order.options[order.selectedIndex].value === 'up'? '' : ` reversed`;
+			return `<ol${startAttrib}${reversedAttrib}>\n<li>\n$1\n</li>\n<li>\n\n</li>\n</ol>`;
+		},
 	p: '<p>\n$1\n</p>\n',
-	ul: '<ul>\n<li>\n$1\n</li>\n<li>\n\n</li>\n</ul>\n',
+	ul: '<ul>\n<li>\n$1\n</li>\n<li>\n\n</li>\n</ul>',
 };
 
 function insertHTML(templateName) {
 	let replacement = htmlTemplates[templateName];
+
+	if (typeof(replacement) === 'function') {
+		let controls = [];
+		for (let i = 1; i < arguments.length; i++) {
+			controls.push(document.getElementById(arguments[i]));
+		}
+		replacement = replacement.apply(null, controls);
+	}
+
 	/*	Check if the replacement pattern contains newline characters and also if it ends with a
 		newline character.
 	*/
