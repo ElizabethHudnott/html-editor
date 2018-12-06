@@ -335,7 +335,7 @@ let htmlTemplates = {
 	h6: '\n<h6>$1</h6>\n',
 	ol: function (start, order) {
 			let startAttrib = start.value === '1'? '' : ` start="${start.value}"`;
-			let reversedAttrib = order.options[order.selectedIndex].value === 'up'? '' : ` reversed`;
+			let reversedAttrib = order.options[order.selectedIndex].value === 'up'? '' : ' reversed';
 			return `<ol${startAttrib}${reversedAttrib}>\n<li>\n$1\n</li>\n<li>\n\n</li>\n</ol>`;
 		},
 	p: '<p>\n$1\n</p>\n',
@@ -401,7 +401,10 @@ function insertHTML(templateName) {
 		$1 occurred in the replacement template.
 	*/
 	if (selection === '' && varOffset !== -1) {
-		let = varPosition = htmlEditor.findPosH(selectionStart, varOffset, 'char');
+		let replacedRE = new RegExp(replacement.slice(0, varOffset).replace(/\n/g, '\n\\s*'));
+		let searchCursor = htmlEditor.getSearchCursor(replacedRE, selectionStart);
+		searchCursor.findNext();
+		let varPosition = searchCursor.to();
 		htmlEditor.setCursor(varPosition);
 		htmlEditor.execCommand('indentAuto');
 	}
