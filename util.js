@@ -21,6 +21,13 @@ function escapeHTML(input) {
 	});
 }
 
+/** Escapes a string so that any regular expression meta characters are preceded by a backslash.
+	@param {string} string The text to escape.
+*/
+function escapeRegExp(string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 function findCheckedRadioButton(buttons) {
 	'use strict';
 	for (let button of buttons) {

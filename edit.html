@@ -170,6 +170,9 @@
 							<a class="list-group-item list-group-item-action active" id="insert-paragraph-tab" data-toggle="list" href="#insert-paragraph" role="tab" aria-controls="insert-paragraph" aria-selected="true">Paragraphs</a>
 						</li>
 						<li>
+							<a class="list-group-item list-group-item-action" id="insert-break-tab" data-toggle="list" href="#insert-break" role="tab" aria-controls="insert-break" aria-selected="false">Breaks</a>
+						</li>
+						<li>
 							<a class="list-group-item list-group-item-action" id="insert-list-tab" data-toggle="list" href="#insert-list" role="tab" aria-controls="insert-list">Lists</a>
 						</li>
 					</ul>
@@ -208,6 +211,26 @@
 							<button class="btn btn-light d-flex justify-content-between" onclick="insertHTML('p')">
 								<div class="menu-button-name">Paragraph</div>
 								<div><span class="badge badge-pill badge-info">&lt;p&gt;</span></div>
+							</button>
+							<button class="btn btn-light d-flex justify-content-between" onclick="insertHTML('address')">
+								<div class="menu-button-name">Contact Address</div>
+								<div><span class="badge badge-pill badge-info">&lt;address&gt;</span></div>
+							</button>
+							<button class="btn btn-light d-flex justify-content-between" onclick="insertHTML('pre')">
+								<div class="menu-button-name">Pre-Formatted Text</div>
+								<div><span class="badge badge-pill badge-info">&lt;pre&gt;</span></div>
+							</button>
+						</div>
+					</div>
+					<div class="tab-pane show" id="insert-break" role="tabpanel" aria-labelledby="insert-break-tab">
+						<div class="button-menu">
+							<button class="btn btn-light d-flex justify-content-between" onclick="insertHTML('br')">
+								<div class="menu-button-name">New Line</div>
+								<div><span class="badge badge-pill badge-info">&lt;br&gt;</span></div>
+							</button>
+							<button class="btn btn-light d-flex justify-content-between" onclick="insertHTML('hr')">
+								<div class="menu-button-name">New Theme</div>
+								<div><span class="badge badge-pill badge-info">&lt;hr&gt;</span></div>
 							</button>
 						</div>
 					</div>

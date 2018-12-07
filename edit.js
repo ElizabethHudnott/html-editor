@@ -326,6 +326,8 @@ insertModal.on('hidden.bs.modal', function () {
 
 //Don't put any tabs or spaces at the beginning of a new line.
 let htmlTemplates = {
+	address: '<address>\n$1\n</address>',
+	br: '<br>\n',
 	dl: '<dl>\n<dt></dt>\n<dd>\n\n</dd>\n<dt></dt>\n<dd>\n\n</dd>\n</dl>',
 	h1: '<h1>\n$1\n</h1>\n',
 	h2: '\n<h2>\n$1\n</h2>\n',
@@ -333,6 +335,7 @@ let htmlTemplates = {
 	h4: '\n<h4>\n$1\n</h4>\n',
 	h5: '\n<h5>$1</h5>\n',
 	h6: '\n<h6>$1</h6>\n',
+	hr: '<hr>\n',
 	nav: function (selection) {
 		let str = '<nav>\n<ul class="nav">\n';
 		if (selection === '') {
@@ -348,7 +351,8 @@ let htmlTemplates = {
 			let reversedAttrib = order.options[order.selectedIndex].value === 'up'? '' : ' reversed';
 			return `<ol${startAttrib}${reversedAttrib}>\n<li>\n$1\n</li>\n<li>\n\n</li>\n</ol>`;
 	},
-	p: '<p>\n$1\n</p>\n',
+	p: '<p>\n$1\n</p>',
+	pre: '<pre>$1</pre>',
 	ul: '<ul>\n<li>\n$1\n</li>\n<li>\n\n</li>\n</ul>',
 };
 
@@ -382,7 +386,7 @@ function insertHTML(templateName) {
 	/*	If it's a multi-line replace and we're not currently at the beginning of a line then
 		include an extra newline character at the beginning.
 	*/
-	if (hasNewlines || newlineAfter) {
+	if (hasNewlines || (newlineAfter && templateName !== 'br')) {
 		let charsBefore = htmlEditor.getRange({line: selectionStart.line, ch: 0}, selectionStart);
 		if (!/^\s*$/.test(charsBefore)) {
 			replacement = '\n' + replacement;
@@ -399,7 +403,7 @@ function insertHTML(templateName) {
 	htmlEditor.replaceSelection(replacement, 'around');
 
 	//Make sure the new text is properly indented.
-	if (hasNewlines) {
+	if (hasNewlines && templateName !== 'pre') {
 		htmlEditor.execCommand('indentAuto');
 	}
 
@@ -412,7 +416,7 @@ function insertHTML(templateName) {
 
 	//Place the cursor in the place where $1 occurred in the replacement template.
 	if (varOffset !== -1) {
-		let replacedRE = new RegExp(replacement.slice(0, varOffset + selection.length).replace(/\n/g, '\n\\s*'));
+		let replacedRE = new RegExp('^' + escapeRegExp(replacement.slice(0, varOffset + selection.length)).replace(/\n[\t ]*/g, '\n[\t ]*'));
 		let searchCursor = htmlEditor.getSearchCursor(replacedRE, selectionStart);
 		searchCursor.findNext();
 		let varPosition = searchCursor.to();
